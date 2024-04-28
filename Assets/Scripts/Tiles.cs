@@ -5,15 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class Tiles : MonoBehaviour
 {
-    [SerializeField] SpawnableTiles tileData;
 
-    EPolarity tilePolarity;
+    [SerializeField] EPolarity tilePolarity;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        tilePolarity = tileData.eCharge;
-    }
 
     public EPolarity getTilePolarity()
     {

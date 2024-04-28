@@ -417,7 +417,6 @@ MonoBehaviour:
     m_Bits: 64
   grabPoint: {fileID: 842645736}
   rayPoint: {fileID: 113763715}
-  rayDistance: 0
 --- !u!60 &556650203
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -867,8 +866,8 @@ GameObject:
   - component: {fileID: 1820189244}
   - component: {fileID: 1820189245}
   - component: {fileID: 1820189246}
-  - component: {fileID: 1820189247}
   - component: {fileID: 1820189248}
+  - component: {fileID: 1820189247}
   m_Layer: 6
   m_Name: Square (1)
   m_TagString: Untagged
@@ -1000,7 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4a8dddd19236f40b0b0f57c19619db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileData: {fileID: 11400000, guid: 46c3068b5689bb648a0ad9987af76e1a, type: 2}
+  tilePolarity: 1
 --- !u!50 &1820189248
 Rigidbody2D:
   serializedVersion: 4
