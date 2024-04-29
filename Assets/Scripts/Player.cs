@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform grabPoint;
     [SerializeField] Transform rayPoint;
+    [SerializeField] Transform polarityResetTimer;
     float rayDistance;
     private GameObject grabbedTile;
     private int layerIndex;
@@ -77,7 +78,9 @@ public class Player : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse Button Down");
+            playerPolarity = EPolarity.Positive;
+            Debug.Log("Polarity Updated "+playerPolarity);
+            Debug.Log("Mouse Button Down Left");
             Vector3 touchPos = getTouchPosition();
             Debug.Log("Touch Pos = "+touchPos);
 
@@ -105,6 +108,12 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("Mouse Button Down Left");
+            playerPolarity = EPolarity.Positive;
+            Debug.Log("Polarity Updated "+playerPolarity);
         }
         
     }
