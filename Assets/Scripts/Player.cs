@@ -6,24 +6,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float playerSpeed;
-    [SerializeField] float jumpPower;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform grabPoint;
-    [SerializeField] Transform rayPoint;
-    [SerializeField] float polarityResetTimer;
+    [SerializeField] float playerSpeed;         //player speed
+    [SerializeField] float jumpPower;           //jump power
+    [SerializeField] Transform groundCheck;     //ground check point on Player 
+    [SerializeField] LayerMask groundLayer;     //Layermask ref for ground layer
+    [SerializeField] Transform grabPoint;       //transform point where player will grab the tiles
+    [SerializeField] Transform rayPoint;        //Raycast Emittor point
+    [SerializeField] float polarityResetTime;  //Player polarity reset time
     float rayDistance;
-    private GameObject grabbedTile;
+    private GameObject grabbedTile;             // reference for grabbed tile
     private int layerIndex;
-    bool isActve;
-    
+    bool isPolarityTimerActive;                 // bool to check if reset polarity timer is active               
+    Vector3 randomRepelPoint;                   
 
+    bool isRepelled;                            //is tile has reached the random repel point
 
     private float horizontal;
-    private bool isFacingRight = true;
+    private bool isFacingRight = true;          // bool to check if player facing right
 
-    EPolarity playerPolarity;
+    EPolarity playerPolarity;                   // player polarity 
 
     Rigidbody2D rb;
 
@@ -34,7 +35,8 @@ public class Player : MonoBehaviour
 
     void Start() 
     {
-        isActve = false;
+        isPolarityTimerActive = false;
+        isRepelled = false;
         layerIndex = LayerMask.NameToLayer("Ground");
         Debug.Log(layerIndex);
         playerPolarity = EPolarity.Negative;
@@ -66,9 +68,14 @@ public class Player : MonoBehaviour
             {
                 attractTile(grabbedTile);
             }
-            if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()==playerPolarity)
+            else if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()==playerPolarity)
             {
-                repelTile(grabbedTile);
+                if (isRepelled == false)
+                {
+                    randomRepelPoint = new(Random.Range(3f,5f), Random.Range(3f,5f), 0f);
+                    Debug.Log("RandomLocation of Repel : "+randomRepelPoint);
+                }
+                repelTile(grabbedTile, randomRepelPoint);
             }
         }
         
@@ -85,13 +92,11 @@ public class Player : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            if(!isActve)
+            if(!isPolarityTimerActive)
             {
-                StartCoroutine(ActivatePolarity(polarityResetTimer, EPolarity.Positive));
+                StartCoroutine(ActivatePolarity(polarityResetTime, EPolarity.Positive));
                 Debug.Log("xyz");
             }
-            //playerPolarity = EPolarity.Positive;
-            //ActivatePolarity(EPolarity.Positive);
             
             Debug.Log("Polarity Updated "+playerPolarity);
             Debug.Log("Mouse Button Down Left");
@@ -125,12 +130,16 @@ public class Player : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Mouse Button Down Left");
-            if(!isActve)
+            Debug.Log("Mouse Button Down Right");
+            if(!isPolarityTimerActive)
             {
-                ActivatePolarity(polarityResetTimer, EPolarity.Negative);
+                ActivatePolarity(polarityResetTime, EPolarity.Negative);
             }
             Debug.Log("Polarity Updated "+playerPolarity);
+        }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            setPolarity(EPolarity.Negative);
         }
     }
 
@@ -175,7 +184,7 @@ public class Player : MonoBehaviour
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
         if(transform.position.x < grabPoint.position.x)
         {
-            //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
+            grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
             grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
                                                                 grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f),
                                                                 0.05f);
@@ -192,16 +201,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    void repelTile(GameObject tileToMove)
+    void repelTile(GameObject tileToMove, Vector3 pointToMove)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
-        
-
+        if(grabbedTile.transform.position != (transform.position+pointToMove))
+        {
+            isRepelled=true;
+            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
+                                                                transform.position+pointToMove,
+                                                                0.05f);
+        }
+        else
+        {
+            grabbedTile = null;
+            isRepelled = false;
+        }
     }
 
     void ResetPolarity()
     {
-        isActve = false;
+        isPolarityTimerActive = false;
         setPolarity(EPolarity.Neutral);
         Debug.Log("Value reset to Neutral");
     }
@@ -209,7 +228,7 @@ public class Player : MonoBehaviour
     IEnumerator ActivatePolarity(float resetdelay, EPolarity polarity)
     {
         setPolarity(polarity);
-        isActve=true;
+        isPolarityTimerActive=true;
         yield return new WaitForSeconds(resetdelay);
         ResetPolarity();
     }

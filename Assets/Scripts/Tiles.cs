@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Tiles : MonoBehaviour, ITiles
+public class Tiles : MonoBehaviour
 {
 
     [SerializeField] EPolarity tilePolarity;
@@ -19,20 +19,6 @@ public class Tiles : MonoBehaviour, ITiles
     {
         tilePolarity = newPolarity;
     }
-
-    public void attractTile()
-    {
-
-    }
-   public void repelTile()
-   {
-    
-   }
 }
 
-interface ITiles 
-{
-    public void attractTile();
 
-    public void repelTile();
-}
