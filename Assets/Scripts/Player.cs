@@ -1,6 +1,7 @@
 
 
 using System.Collections;
+using System.Data;
 using UnityEngine;
 
 
@@ -62,23 +63,33 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        #region Tile Behavior On Player Polarity
         if(grabbedTile !=null)
         {
-            if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()!=playerPolarity)
+            if(playerPolarity!=EPolarity.Neutral)
             {
-                attractTile(grabbedTile);
-            }
-            else if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()==playerPolarity)
-            {
-                if (isRepelled == false)
+                if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()!=playerPolarity)
                 {
-                    randomRepelPoint = new(Random.Range(3f,5f), Random.Range(3f,5f), 0f);
-                    Debug.Log("RandomLocation of Repel : "+randomRepelPoint);
+                    attractTile(grabbedTile);
                 }
-                repelTile(grabbedTile, randomRepelPoint);
+                else if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()==playerPolarity)
+                {
+                    if (isRepelled == false)
+                    {
+                        randomRepelPoint = new(Random.Range(3f,5f), Random.Range(3f,5f), 0f);
+                        Debug.Log("RandomLocation of Repel : "+randomRepelPoint);
+                    }
+                    repelTile(grabbedTile, randomRepelPoint);
+                }
+            }
+            else
+            {
+                grabbedTile.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                grabbedTile.GetComponent<Rigidbody2D>().isKinematic = false;
+                
             }
         }
-        
+        #endregion
 
         
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -160,6 +171,7 @@ public class Player : MonoBehaviour
         playerPolarity = newPolarity;
     }
 
+    // Get Tile position for calculating direction of tile in context to player position
     Vector3 getTouchPosition()
     {
         //     Touch touch = Input.GetTouch(0);
@@ -174,11 +186,13 @@ public class Player : MonoBehaviour
         return touchPostion;
     }
 
+    // calculate edge offset of the tile to attach to player
     Vector3 placementOffset(Transform objectTransform)
     {
         return new Vector3((objectTransform.localScale.x/2),0f,0f);
     }
 
+    // Attract tile to player functionality 
     void attractTile(GameObject tileToMove)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -201,6 +215,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Repel tile from player functionality
     void repelTile(GameObject tileToMove, Vector3 pointToMove)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -218,6 +233,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // reset player polarity to neutral
     void ResetPolarity()
     {
         isPolarityTimerActive = false;
@@ -225,6 +241,7 @@ public class Player : MonoBehaviour
         Debug.Log("Value reset to Neutral");
     }
 
+    //Coroutine to activate reset player polarity timer and assign polarity to player
     IEnumerator ActivatePolarity(float resetdelay, EPolarity polarity)
     {
         setPolarity(polarity);

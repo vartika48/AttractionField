@@ -697,6 +697,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6951204492480245657, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
+      propertyPath: polarityResetTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951204492480245657, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
       propertyPath: polarityResetTimer
       value: 5
       objectReference: {fileID: 0}
