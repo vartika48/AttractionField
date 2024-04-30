@@ -1,12 +1,8 @@
 
-using System;
+
 using System.Collections;
-using System.IO;
-using Unity.Collections;
-using Unity.VisualScripting;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
 
 public class Player : MonoBehaviour
 {
@@ -16,11 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform grabPoint;
     [SerializeField] Transform rayPoint;
-    [SerializeField] Transform polarityResetTimer;
+    [SerializeField] float polarityResetTimer;
     float rayDistance;
     private GameObject grabbedTile;
     private int layerIndex;
-
+    bool isActve;
+    
 
 
     private float horizontal;
@@ -37,6 +34,7 @@ public class Player : MonoBehaviour
 
     void Start() 
     {
+        isActve = false;
         layerIndex = LayerMask.NameToLayer("Ground");
         Debug.Log(layerIndex);
         playerPolarity = EPolarity.Negative;
@@ -62,10 +60,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(grabbedTile !=null && grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()!=playerPolarity)
+        if(grabbedTile !=null)
         {
-            attractTile(grabbedTile);
+            if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()!=playerPolarity)
+            {
+                attractTile(grabbedTile);
+            }
+            if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()==playerPolarity)
+            {
+                repelTile(grabbedTile);
+            }
         }
+        
+
         
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -78,7 +85,14 @@ public class Player : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            playerPolarity = EPolarity.Positive;
+            if(!isActve)
+            {
+                StartCoroutine(ActivatePolarity(polarityResetTimer, EPolarity.Positive));
+                Debug.Log("xyz");
+            }
+            //playerPolarity = EPolarity.Positive;
+            //ActivatePolarity(EPolarity.Positive);
+            
             Debug.Log("Polarity Updated "+playerPolarity);
             Debug.Log("Mouse Button Down Left");
             Vector3 touchPos = getTouchPosition();
@@ -112,16 +126,17 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             Debug.Log("Mouse Button Down Left");
-            playerPolarity = EPolarity.Positive;
+            if(!isActve)
+            {
+                ActivatePolarity(polarityResetTimer, EPolarity.Negative);
+            }
             Debug.Log("Polarity Updated "+playerPolarity);
         }
-        
     }
 
     private void FixedUpdate() 
     {
         rb.velocity = new Vector2(horizontal * playerSpeed, rb.velocity.y);
-       
     }
 
     //Function for Fetching Player Polarity
@@ -138,7 +153,6 @@ public class Player : MonoBehaviour
 
     Vector3 getTouchPosition()
     {
-
         //     Touch touch = Input.GetTouch(0);
         //     Vector3 touchPostion = Camera.main.ScreenToWorldPoint(touch.position);
         //     touchPostion.z=0f;
@@ -159,25 +173,47 @@ public class Player : MonoBehaviour
     void attractTile(GameObject tileToMove)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
-
-                        if(transform.position.x < grabPoint.position.x)
-                        {
-                            //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
-                            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
-                                                                                grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f),
-                                                                                0.05f);
-                            //grabbedTile.transform.position = grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f);
-                        }
-                        else
-                        {
-                            grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
-                            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
-                                                                                grabPoint.position-placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f),
-                                                                                0.05f);
-                            // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
-                            //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
-                        }
+        if(transform.position.x < grabPoint.position.x)
+        {
+            //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
+            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
+                                                                grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f),
+                                                                0.05f);
+            //grabbedTile.transform.position = grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f);
+        }
+        else
+        {
+            grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
+            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
+                                                                grabPoint.position-placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f),
+                                                                0.05f);
+            // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
+            //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
     }
+
+    void repelTile(GameObject tileToMove)
+    {
+        tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
+        
+
+    }
+
+    void ResetPolarity()
+    {
+        isActve = false;
+        setPolarity(EPolarity.Neutral);
+        Debug.Log("Value reset to Neutral");
+    }
+
+    IEnumerator ActivatePolarity(float resetdelay, EPolarity polarity)
+    {
+        setPolarity(polarity);
+        isActve=true;
+        yield return new WaitForSeconds(resetdelay);
+        ResetPolarity();
+    }
+
 }
 
 public enum EPolarity
