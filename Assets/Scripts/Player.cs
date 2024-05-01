@@ -108,18 +108,17 @@ public class Player : MonoBehaviour
                 StartCoroutine(ActivatePolarity(polarityResetTime, EPolarity.Positive));
                 Debug.Log("xyz");
             }
-            
+            Vector3 touchPos = getTouchPosition();
+
+
             Debug.Log("Polarity Updated "+playerPolarity);
             Debug.Log("Mouse Button Down Left");
-            Vector3 touchPos = getTouchPosition();
             Debug.Log("Touch Pos = "+touchPos);
-
-            Debug.Log(" Ray Distance "+Vector3.Distance(rayPoint.position, touchPos));
-
+            Debug.Log("Ray Distance "+Vector3.Distance(rayPoint.position, touchPos));
             Debug.Log("Start Position "+rayPoint.position);
             Debug.Log("End Position"+(touchPos));
 
-            RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, Mathf.Infinity, groundLayer);
+            RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
             Debug.DrawRay(rayPoint.position, touchPos-rayPoint.transform.position, Color.red, 500f);
             
 
@@ -141,16 +140,36 @@ public class Player : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(1))
         {
+            Vector3 touchPos = getTouchPosition();
             Debug.Log("Mouse Button Down Right");
             if(!isPolarityTimerActive)
             {
                 ActivatePolarity(polarityResetTime, EPolarity.Negative);
             }
-            Debug.Log("Polarity Updated "+playerPolarity);
+
+            RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, Mathf.Infinity, groundLayer);
+            Debug.DrawRay(rayPoint.position, touchPos-rayPoint.transform.position, Color.red, 500f);
+
+            Debug.Log(hitInfo.collider);
+
+            if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex)  
+                {
+                Debug.Log("Collider Layer : "+hitInfo.collider.gameObject.layer.ToString());
+                
+                if (hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != EPolarity.Neutral)
+                {
+                    if(hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != playerPolarity)
+                    {
+                        grabbedTile = hitInfo.collider.gameObject;
+                        //moveTile(grabbedTile);                       
+                    }
+                }
+            }
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             setPolarity(EPolarity.Negative);
+            Debug.Log(playerPolarity);
         }
     }
 
