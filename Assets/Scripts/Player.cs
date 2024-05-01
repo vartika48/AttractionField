@@ -168,7 +168,14 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            setPolarity(EPolarity.Negative);
+            if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
+            {
+                setPolarity(EPolarity.Negative);
+            }
+            else if(playerPolarity==EPolarity.Negative)
+            {
+                setPolarity(EPolarity.Positive);
+            }
             Debug.Log(playerPolarity);
         }
     }
