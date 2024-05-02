@@ -7,6 +7,8 @@ public class Tiles : MonoBehaviour
 {
 
     [SerializeField] EPolarity tilePolarity;
+    [SerializeField] bool bIsStatic;
+
 
     // Start is called before the first frame update
 

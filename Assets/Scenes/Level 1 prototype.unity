@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
+  bIsStatic: 0
 --- !u!50 &199068208
 Rigidbody2D:
   serializedVersion: 4
@@ -376,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 265689678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35, y: -5, z: 0}
+  m_LocalPosition: {x: 32.04, y: -2.36, z: 0}
   m_LocalScale: {x: 18.8299, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -440,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
+  bIsStatic: 0
 --- !u!50 &265689683
 Rigidbody2D:
   serializedVersion: 4
@@ -501,7 +503,7 @@ Transform:
   m_GameObject: {fileID: 276631088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0.48, z: 0}
+  m_LocalPosition: {x: 1.2700005, y: 0.48, z: 0}
   m_LocalScale: {x: 17.68429, y: 12.659659, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -617,6 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 2
+  bIsStatic: 0
 --- !u!50 &276631093
 Rigidbody2D:
   serializedVersion: 4
@@ -658,11 +661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876638894670106893, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.69
       objectReference: {fileID: 0}
     - target: {fileID: 5876638894670106893, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5876638894670106893, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -805,7 +808,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.165325
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -830,7 +833,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 3.6299992, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1078,6 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 2
+  bIsStatic: 0
 --- !u!50 &756436497
 Rigidbody2D:
   serializedVersion: 4
@@ -1250,6 +1254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 1
+  bIsStatic: 0
 --- !u!50 &763069562
 Rigidbody2D:
   serializedVersion: 4
@@ -1357,13 +1362,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857654177}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 73, y: -0.61, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2827642, w: 0.9591895}
+  m_LocalPosition: {x: 68.68, y: 4.87, z: 0}
   m_LocalScale: {x: 18.656221, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 32.851}
 --- !u!61 &857654180
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1422,6 +1427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
+  bIsStatic: 0
 --- !u!50 &857654182
 Rigidbody2D:
   serializedVersion: 4
@@ -1530,7 +1536,7 @@ Transform:
   m_GameObject: {fileID: 1251005406}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92, y: -5, z: 0}
+  m_LocalPosition: {x: 92, y: -4.82, z: 0}
   m_LocalScale: {x: 15.1726, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1594,6 +1600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 1
+  bIsStatic: 0
 --- !u!50 &1251005411
 Rigidbody2D:
   serializedVersion: 4
@@ -1766,6 +1773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 2
+  bIsStatic: 0
 --- !u!50 &1325277938
 Rigidbody2D:
   serializedVersion: 4
@@ -1938,6 +1946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 2
+  bIsStatic: 0
 --- !u!50 &1641313880
 Rigidbody2D:
   serializedVersion: 4

@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
                 }
                 else if(grabbedTile.gameObject.GetComponent<Tiles>().getTilePolarity()==playerPolarity)
                 {
+                    //Add the tile attachment code here , Tap on tile to fix, Then change polarity to repel.
+
                     if (isRepelled == false)
                     {
                         randomRepelPoint = new(Random.Range(3f,5f), Random.Range(3f,5f), 0f);
@@ -84,8 +86,14 @@ public class Player : MonoBehaviour
             }
             else
             {
-                grabbedTile.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-                grabbedTile.GetComponent<Rigidbody2D>().isKinematic = false;
+                if (isRepelled == false)
+                    {
+                        randomRepelPoint = new(Random.Range(3f,5f), Random.Range(3f,5f), 0f);
+                        Debug.Log("RandomLocation of Repel : "+randomRepelPoint);
+                    }
+                repelTile(grabbedTile, randomRepelPoint);
+                // grabbedTile.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                // grabbedTile.GetComponent<Rigidbody2D>().isKinematic = false;
                 
             }
         }
@@ -103,23 +111,27 @@ public class Player : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            if(!isPolarityTimerActive)
+            if(!grabbedTile)
             {
-                StartCoroutine(ActivatePolarity(polarityResetTime, EPolarity.Positive));
-                Debug.Log("xyz");
-            }
-            Vector3 touchPos = getTouchPosition();
+
+           
+                if(!isPolarityTimerActive)
+                {
+                    StartCoroutine(ActivatePolarity(polarityResetTime));
+                    Debug.Log("xyz");
+                }
+                Vector3 touchPos = getTouchPosition();
 
 
-            Debug.Log("Polarity Updated "+playerPolarity);
-            Debug.Log("Mouse Button Down Left");
-            Debug.Log("Touch Pos = "+touchPos);
-            Debug.Log("Ray Distance "+Vector3.Distance(rayPoint.position, touchPos));
-            Debug.Log("Start Position "+rayPoint.position);
-            Debug.Log("End Position"+(touchPos));
+                Debug.Log("Polarity Updated "+playerPolarity);
+                Debug.Log("Mouse Button Down Left");
+                Debug.Log("Touch Pos = "+touchPos);
+                Debug.Log("Ray Distance "+Vector3.Distance(rayPoint.position, touchPos));
+                Debug.Log("Start Position "+rayPoint.position);
+                Debug.Log("End Position"+(touchPos));
 
-            RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
-            Debug.DrawRay(rayPoint.position, touchPos-rayPoint.transform.position, Color.red, 500f);
+                RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
+                Debug.DrawRay(rayPoint.position, touchPos-rayPoint.transform.position, Color.red, 500f);
             
 
             Debug.Log(hitInfo.collider);
@@ -132,40 +144,49 @@ public class Player : MonoBehaviour
                 {
                     if(hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != playerPolarity)
                     {
-                        grabbedTile = hitInfo.collider.gameObject;
+                        if (hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != playerPolarity)
+                        {
+
+                        }
+                        else
+                        {
+                            grabbedTile = hitInfo.collider.gameObject;
+                        }
+                       
                         //moveTile(grabbedTile);                       
                     }
                 }
             }
         }
-        if(Input.GetMouseButtonDown(1))
-        {
-            Vector3 touchPos = getTouchPosition();
-            Debug.Log("Mouse Button Down Right");
-            if(!isPolarityTimerActive)
-            {
-                ActivatePolarity(polarityResetTime, EPolarity.Negative);
-            }
+        }
+        // if(Input.GetMouseButtonDown(1))
+        // {
+        //     Vector3 touchPos = getTouchPosition();
+        //     Debug.Log("Mouse Button Down Right");
+        //     if(!isPolarityTimerActive)
+        //     {
+        //         ActivatePolarity(polarityResetTime, EPolarity.Negative);
+        //     }
 
-            RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, Mathf.Infinity, groundLayer);
-            Debug.DrawRay(rayPoint.position, touchPos-rayPoint.transform.position, Color.red, 500f);
+        //     RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, Mathf.Infinity, groundLayer);
+        //     Debug.DrawRay(rayPoint.position, touchPos-rayPoint.transform.position, Color.red, 500f);
 
-            Debug.Log(hitInfo.collider);
+        //     Debug.Log(hitInfo.collider);
 
-            if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex)  
-                {
-                Debug.Log("Collider Layer : "+hitInfo.collider.gameObject.layer.ToString());
+        //     if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex)  
+        //         {
+        //         Debug.Log("Collider Layer : "+hitInfo.collider.gameObject.layer.ToString());
                 
-                if (hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != EPolarity.Neutral)
-                {
-                    if(hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != playerPolarity)
-                    {
-                        grabbedTile = hitInfo.collider.gameObject;
-                        //moveTile(grabbedTile);                       
-                    }
-                }
-            }
-        }
+        //         if (hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != EPolarity.Neutral)
+        //         {
+        //             if(hitInfo.collider.gameObject.GetComponent<Tiles>().getTilePolarity() != playerPolarity)
+        //             {
+        //                 grabbedTile = hitInfo.collider.gameObject;
+        //                 //moveTile(grabbedTile);                       
+        //             }
+        //         }
+        //     }
+        // }
         if(Input.GetKeyDown(KeyCode.Q))
         {
             if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
@@ -268,12 +289,13 @@ public class Player : MonoBehaviour
     }
 
     //Coroutine to activate reset player polarity timer and assign polarity to player
-    IEnumerator ActivatePolarity(float resetdelay, EPolarity polarity)
+    IEnumerator ActivatePolarity(float resetdelay)
     {
-        setPolarity(polarity);
+        //setPolarity(polarity);
         isPolarityTimerActive=true;
         yield return new WaitForSeconds(resetdelay);
-        ResetPolarity();
+        ResetPolarity(); //Work later if needed
+
     }
 
 }
