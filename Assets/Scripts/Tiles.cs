@@ -22,5 +22,3 @@ public class Tiles : MonoBehaviour
         tilePolarity = newPolarity;
     }
 }
-
-
