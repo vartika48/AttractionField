@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4e96b5e6b7a57784498e57a635b04272
+guid: d5bb2f2ff57a5f74d9727ba2d3245e61
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Girders_0
+      name: Girders_Negative _0
       rect:
         serializedVersion: 2
         x: 817
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e85083314a55c0f4e843c8f996048e1e
-      internalID: 662489085
+      spriteID: adfbdc64daf1efc4ab8de1b70717a0ee
+      internalID: -1842544891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_1
+      name: Girders_Negative _1
       rect:
         serializedVersion: 2
         x: 1006
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61d8f41bafc161b46a521cb0f5dda88d
-      internalID: -1281392683
+      spriteID: cf6b0aa59192a4549b72edde6824b358
+      internalID: 132745550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_2
+      name: Girders_Negative _2
       rect:
         serializedVersion: 2
         x: 1294
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 592ca54ffb495134490fb2ea9e884509
-      internalID: -2128333645
+      spriteID: dad3b256d773910438e3121e656313de
+      internalID: -1111898579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_3
+      name: Girders_Negative _3
       rect:
         serializedVersion: 2
         x: 1487
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c087c658e3f6fe7409eea3a6ede587f1
-      internalID: 170307452
+      spriteID: 11e82a662423ec44bb5df183dbb19dad
+      internalID: 1117154357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_4
+      name: Girders_Negative _4
       rect:
         serializedVersion: 2
         x: 1775
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1516157ae1c930a4e87119c0413918ef
-      internalID: 1326898945
+      spriteID: 60a36cb7330e95541ab698b0f6dc956b
+      internalID: 1201226871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_5
+      name: Girders_Negative _5
       rect:
         serializedVersion: 2
         x: 1967
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d541cf4be5f7784fb61257c840dc018
-      internalID: 1348130781
+      spriteID: 75f326d0f1d506840a8b120fc298cf42
+      internalID: -1439341352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_6
+      name: Girders_Negative _6
       rect:
         serializedVersion: 2
         x: 815
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a697174c4bff6fd42a13814ac8eae693
-      internalID: 1455601344
+      spriteID: d253c93c1454ba84e92c6e34de98e719
+      internalID: 980413459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_7
+      name: Girders_Negative _7
       rect:
         serializedVersion: 2
         x: 1006
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 118c78863afa6034f97e3fe8d6497c0b
-      internalID: -1554499384
+      spriteID: 2aecee1f442f40b43bccb2adacb87f04
+      internalID: -847924325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_8
+      name: Girders_Negative _8
       rect:
         serializedVersion: 2
         x: 1288
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0658e262e78f68b48bbd1b35546799ef
-      internalID: 1493414371
+      spriteID: 860999764320ad04299e69f2ff14661b
+      internalID: -1977614407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_9
+      name: Girders_Negative _9
       rect:
         serializedVersion: 2
         x: 1487
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98e9b57be952c304d9693da681dbad85
-      internalID: 1549209938
+      spriteID: f36077baf26402f44afadbb30fdb999f
+      internalID: 1444510040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_10
+      name: Girders_Negative _10
       rect:
         serializedVersion: 2
         x: 1775
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3359eba84d284964fb62516cd787df1f
-      internalID: 69729413
+      spriteID: 9efec6e4b83d38c4690e669f2ce9efad
+      internalID: 1157533522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_11
+      name: Girders_Negative _11
       rect:
         serializedVersion: 2
         x: 1967
@@ -355,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00e96ff4d0c55a747905ab0d16a7a495
-      internalID: -1811947833
+      spriteID: d23f74668e2effa48828d98024cfaaef
+      internalID: 1244635811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_12
+      name: Girders_Negative _12
       rect:
         serializedVersion: 2
         x: 46
@@ -376,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2507d3a0d8988d429e4c0e662e9173f
-      internalID: -1541228578
+      spriteID: d5ca337137ba4a847bc97e275f8c9e2c
+      internalID: 1533704836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_13
+      name: Girders_Negative _13
       rect:
         serializedVersion: 2
         x: 329
@@ -397,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 876d8f908b29dab48b779d21007fe6a9
-      internalID: -1334844488
+      spriteID: 36236f02521c2d64b900096c21765374
+      internalID: -653128257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_14
+      name: Girders_Negative _14
       rect:
         serializedVersion: 2
         x: 623
@@ -418,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 358810505f5975a44ba8abbe65912fc8
-      internalID: -807748800
+      spriteID: da81a1cdb33b2d44fbb2355b49a60f9d
+      internalID: -195399707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_15
+      name: Girders_Negative _15
       rect:
         serializedVersion: 2
         x: 911
@@ -439,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d52607e875bb08f41b536c19e7dc3e01
-      internalID: 1745840901
+      spriteID: b4dd825c654e85940a9297681471f630
+      internalID: -2130054688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_16
+      name: Girders_Negative _16
       rect:
         serializedVersion: 2
         x: 1192
@@ -460,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f104fc42dedfce4abcfff13c3c5b371
-      internalID: -1062006904
+      spriteID: db503316571e69049ac7c0490f51882c
+      internalID: -1137760863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_17
+      name: Girders_Negative _17
       rect:
         serializedVersion: 2
         x: 1487
@@ -481,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10c6af096562045419c8651dd8f33836
-      internalID: 969524283
+      spriteID: 8fb8942483ab70f4da70084918954480
+      internalID: 520153384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_18
+      name: Girders_Negative _18
       rect:
         serializedVersion: 2
         x: 94
@@ -502,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2648db7b99ccef4f8a5828c8b707f29
-      internalID: 369279511
+      spriteID: 3f495f829a7cc6b41b70c1343706e259
+      internalID: 162082328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_19
+      name: Girders_Negative _19
       rect:
         serializedVersion: 2
         x: 377
@@ -523,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd00aee3ddbf1a04988a630050166298
-      internalID: 245411452
+      spriteID: a15c8df5b8d2321499fa9d95d455422b
+      internalID: -1101394143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_20
+      name: Girders_Negative _20
       rect:
         serializedVersion: 2
         x: 671
@@ -544,14 +544,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0448cd04cfe8fd347bba8f8d0eacb0de
-      internalID: 1795754143
+      spriteID: 55c935daf01bddb4fb85046af158fa61
+      internalID: -1046342342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_21
+      name: Girders_Negative _21
       rect:
         serializedVersion: 2
         x: 959
@@ -565,14 +565,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da6d5693f0f8c9d4184a09ef58bd6e61
-      internalID: -651233338
+      spriteID: 9338b16cbbcd1274b80fbe60fb049816
+      internalID: -383213482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_22
+      name: Girders_Negative _22
       rect:
         serializedVersion: 2
         x: 1240
@@ -586,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44aee973e994dc241b5cd98e58c81d66
-      internalID: -1470119630
+      spriteID: 8cdfa52872b1ff0438870bf094d2fbef
+      internalID: -576119415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girders_23
+      name: Girders_Negative _23
       rect:
         serializedVersion: 2
         x: 1535
@@ -607,8 +607,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f143652f3eb28e499c63cdc6ea03310
-      internalID: -121133783
+      spriteID: b74863d024aff354fb7dc2d42c38f328
+      internalID: 33021036
       vertices: []
       indices: 
       edges: []
@@ -624,30 +624,30 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Girders_0: 662489085
-      Girders_1: -1281392683
-      Girders_10: 69729413
-      Girders_11: -1811947833
-      Girders_12: -1541228578
-      Girders_13: -1334844488
-      Girders_14: -807748800
-      Girders_15: 1745840901
-      Girders_16: -1062006904
-      Girders_17: 969524283
-      Girders_18: 369279511
-      Girders_19: 245411452
-      Girders_2: -2128333645
-      Girders_20: 1795754143
-      Girders_21: -651233338
-      Girders_22: -1470119630
-      Girders_23: -121133783
-      Girders_3: 170307452
-      Girders_4: 1326898945
-      Girders_5: 1348130781
-      Girders_6: 1455601344
-      Girders_7: -1554499384
-      Girders_8: 1493414371
-      Girders_9: 1549209938
+      Girders_Negative _0: -1842544891
+      Girders_Negative _1: 132745550
+      Girders_Negative _10: 1157533522
+      Girders_Negative _11: 1244635811
+      Girders_Negative _12: 1533704836
+      Girders_Negative _13: -653128257
+      Girders_Negative _14: -195399707
+      Girders_Negative _15: -2130054688
+      Girders_Negative _16: -1137760863
+      Girders_Negative _17: 520153384
+      Girders_Negative _18: 162082328
+      Girders_Negative _19: -1101394143
+      Girders_Negative _2: -1111898579
+      Girders_Negative _20: -1046342342
+      Girders_Negative _21: -383213482
+      Girders_Negative _22: -576119415
+      Girders_Negative _23: 33021036
+      Girders_Negative _3: 1117154357
+      Girders_Negative _4: 1201226871
+      Girders_Negative _5: -1439341352
+      Girders_Negative _6: 980413459
+      Girders_Negative _7: -847924325
+      Girders_Negative _8: -1977614407
+      Girders_Negative _9: 1444510040
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
