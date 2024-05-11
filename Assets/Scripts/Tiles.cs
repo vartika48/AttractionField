@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Tiles : MonoBehaviour
@@ -10,10 +11,25 @@ public class Tiles : MonoBehaviour
     BoxCollider2D tileCollider;
     Rigidbody2D rb;
 
+    public Tiles TileAvailable;
+
+    bool isAttachedSomewhere;
+
+    //bool isGrabbed;
+
+    bool availableForAttachment;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         tileCollider = GetComponent<BoxCollider2D>();
+    }
+
+    void Start()
+    {
+        if(!isStatic)
+        isAttachedSomewhere = false;
+        else
+        isAttachedSomewhere = true;
     }
 
     public EPolarity getTilePolarity()
@@ -29,6 +45,16 @@ public class Tiles : MonoBehaviour
     public bool getIsStatic()
     {
         return isStatic;
+    }
+
+    // public void setIsAvailableForAttachment(bool available)
+    // {
+    //     availableForAttachment = available;
+    // }
+
+    public bool gettIsAvailableForAttachment()
+    {
+        return availableForAttachment;
     }
 
     // Attract tile to player functionality 
@@ -67,5 +93,24 @@ public class Tiles : MonoBehaviour
     private Vector3 PlacementOffset(Transform objectTransform)
     {
         return new Vector3((objectTransform.localScale.x / 2), 0f, 0f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        Tiles otherTileRef = other.gameObject.GetComponent<Tiles>();
+        if(otherTileRef.getTilePolarity() != tilePolarity && !otherTileRef.getIsStatic() && !isAttachedSomewhere)
+        {
+            availableForAttachment = true;
+            TileAvailable = otherTileRef;
+            Renderer renderer = other.gameObject.GetComponentInParent<Renderer>();
+            if (renderer != null)
+            {
+                Bounds bounds = renderer.bounds;
+                Vector3 positionOfAttach = new Vector3(bounds.min.x, bounds.center.y, 0f);
+
+            }
+             
+
+        }       
     }
 }

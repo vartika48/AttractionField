@@ -74,88 +74,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        #region Tile Behavior On Player Polarity
 
-        if(grabbedTile !=null)
-        {
-            if(playerPolarity!=EPolarity.Neutral)
-            {
-                if(HitTileRef.getTilePolarity()!=playerPolarity)
-                {
-                    HitTileRef.AttractTile(grabPoint,collisionHandle);
-                }
-                else if(HitTileRef.getTilePolarity()==playerPolarity)
-                {
-                    //Add the tile attachment code here , Tap on tile to fix, Then change polarity to repel.
-                    if (!isRepelled)
-                    {
-                        randomRepelPoint = new(Random.Range(3f,6f), Random.Range(3f,6f), 0f);
-                        Debug.Log("Random Location of Repel : "+randomRepelPoint);
-                    }
-                    repelTile(grabbedTile, randomRepelPoint);
-                }
-            }
-            else
-            {
+        HandleTiles();
 
-            }
-
-        }
-
-        #endregion
+        HandleMovement();
         
-        horizontal = Input.GetAxisRaw("Horizontal");
+        GrabTiles();
+        
 
-        Flip();
-
-        if(Input.GetButtonDown("Jump") && isGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-        }
-
-        if(Input.GetMouseButtonDown(0))
-        {   
-            Vector3 touchPos = getTouchPosition();
-            if(!grabbedTile)
-            {
-                // if(!isPolarityTimerActive)
-                // {
-                //     StartCoroutine(ActivatePolarity(polarityResetTime));
-                //     Debug.Log("Polarity Timer Activated");
-                // }
-                
-                RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
-                
-                HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
-
-                if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
-                {
-
-                    if (HitTileRef.getTilePolarity() != EPolarity.Neutral)
-                    {
-                        if(HitTileRef.getTilePolarity() != playerPolarity)
-                        {
-                            grabbedTile = hitInfo.collider.gameObject;
-                        }
-                    }
-                }
-
-            }
-            else if (grabbedTile)
-            {
-                RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
-                
-                HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
-
-                if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex) 
-                {
-                    if(HitTileRef.getTilePolarity() != playerPolarity && !HitTileRef.getIsStatic())
-                    {
-                        tileToBridge = hitInfo.collider.gameObject;
-                    }
-                }
-            }
-        }
+        
         
 
         if(Input.GetKeyDown(KeyCode.Q))
@@ -278,6 +205,101 @@ public class Player : MonoBehaviour
 
         float GrabbedObjLeft = boundGrabbedObj.min.x;
         float AttachObjRight = boundGrabbedObj.max.x;
+    }
+
+    void HandleTiles()
+    {
+        if(grabbedTile !=null)
+        {
+            if(playerPolarity!=EPolarity.Neutral)
+            {
+                if(HitTileRef.getTilePolarity()!=playerPolarity)
+                {
+                    attractTile(grabbedTile);
+                }
+                else if(HitTileRef.getTilePolarity()==playerPolarity)
+                {
+                    if(HitTileRef.gettIsAvailableForAttachment())
+                    {
+                        
+                    }
+                    else
+                    {
+                        if (!isRepelled)
+                        {
+                            randomRepelPoint = new(Random.Range(3f,6f), Random.Range(3f,6f), 0f);
+                            Debug.Log("Random Location of Repel : "+randomRepelPoint);
+                        }
+                        repelTile(grabbedTile, randomRepelPoint);
+                    }
+                    
+                    
+
+                }
+            }
+            else
+            {
+
+            }
+
+        }
+    }
+
+    void HandleMovement()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        Flip();
+
+        if(Input.GetButtonDown("Jump") && isGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+        }
+    }
+
+    void GrabTiles()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {   
+            Vector3 touchPos = getTouchPosition();
+            if(!grabbedTile)
+            {
+                
+                RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
+                
+                HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
+
+                if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
+                {
+
+                    if (HitTileRef.getTilePolarity() != EPolarity.Neutral)
+                    {
+                        if(HitTileRef.getTilePolarity() != playerPolarity)
+                        {
+                            grabbedTile = hitInfo.collider.gameObject;
+                            //HitTileRef.setIsGrabbed(true);
+                        }
+                    }
+                }
+
+            }
+            // else if (grabbedTile)
+            // {
+            //     RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
+                
+            //     HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
+
+            //     if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex) 
+            //     {
+            //         if(HitTileRef.getTilePolarity() != playerPolarity && !HitTileRef.getIsStatic())
+            //         {
+            //             tileToBridge = hitInfo.collider.gameObject;
+            //         }
+            //     }
+
+
+            // }
+        }
     }
 
 }
