@@ -4,6 +4,9 @@ using UnityEngine.Tilemaps;
 
 public class Tiles : MonoBehaviour
 {
+
+   // [SerializeField] string TileSpriteName;
+
     [SerializeField] EPolarity tilePolarity;
     [SerializeField] bool isStatic;
     [SerializeField] Transform playerAttachmentPoint;
@@ -11,17 +14,20 @@ public class Tiles : MonoBehaviour
     
     [SerializeField] Vector3 collisionOffset;
 
+    //[SerializeField] GameObject tilemanager;
+
     BoxCollider2D tileCollider;
     Rigidbody2D rb;
 
     [SerializeField] TileData data;
 
-
+    //SpriteRenderer sr;
 
     public Tiles TileAvailable;
 
     bool isAttachedSomewhere;
 
+    
     //bool isGrabbed;
 
     bool availableForAttachment;
@@ -29,6 +35,9 @@ public class Tiles : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         tileCollider = GetComponent<BoxCollider2D>();
+        // sr = GetComponent<SpriteRenderer>();
+        // sr.sprite=tilemanager.GetComponent<TilesRef> ().getSprite(TileSpriteName);
+
     }
 
     void Start()
@@ -130,4 +139,6 @@ public class Tiles : MonoBehaviour
 
         }       
     }
+
+    
 }

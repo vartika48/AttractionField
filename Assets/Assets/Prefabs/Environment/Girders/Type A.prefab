@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4082639711128531890}
   - component: {fileID: 5738230081958715039}
   - component: {fileID: 1285260821941562819}
+  - component: {fileID: -8358599864442748963}
   m_Layer: 0
   m_Name: Type A
   m_TagString: Untagged
@@ -179,7 +180,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
-  bIsStatic: 0
+  isStatic: 0
+  playerAttachmentPoint: {fileID: 0}
+  tileAttachmentPoint: {fileID: 0}
+  collisionOffset: {x: 0, y: 0, z: 0}
+  TileAvailable: {fileID: 0}
 --- !u!58 &1285260821941562819
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -215,3 +220,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &-8358599864442748963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4161154365051289575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca3e3e4806d88b498273f3c2ccc81c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
