@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 
     bool isRepelled;                            //is tile has reached the random repel point
 
+    RaycastHit2D hitInfo;
+
     private float horizontal;
     private bool isFacingRight = true;          // bool to check if player facing right
 
@@ -282,8 +284,10 @@ public class Player : MonoBehaviour
                             grabbedTile.GetComponent<PolygonCollider2D>().isTrigger = false;
 
                             grabbedTile=null;
+                            Debug.LogWarning("grabbedTile Nulled");
                             tempClosestTile =null;
                             HitTileRef = null;
+                            
                         }
                     }
                     else
@@ -320,28 +324,45 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {   
             Vector3 touchPos = getTouchPosition();
+
+            Debug.Log(touchPos);
+
             if(!grabbedTile)
             {
+
+                Debug.Log("Grabbed Tile is NULL");
+                hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
                 
-                RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
-                
+
+
                 HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
 
+                Debug.Log(HitTileRef.gameObject);
 
-                if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
+                if(hitInfo)
                 {
-
-                    if (HitTileRef.getTilePolarity() != EPolarity.Neutral)
+                    if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
                     {
-                        if(HitTileRef.getTilePolarity() != playerPolarity)
+
+                        if (HitTileRef.getTilePolarity() != EPolarity.Neutral)
                         {
-                            grabbedTile = hitInfo.collider.gameObject;
-                            HitTileRef.setIsGrabbed(true);
+                            if(HitTileRef.getTilePolarity() != playerPolarity)
+                            {
+                                grabbedTile = hitInfo.collider.gameObject;
+                                HitTileRef.setIsGrabbed(true);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    Debug.Log("No Tile Found !!");
+                }
+                
 
             }
+            else
+            Debug.Log("Grabbed Tile is Not Null");
         }
     }
 

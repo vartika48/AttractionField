@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager instance;
+
+    public delegate void PolarityChangedDelegate(EPolarity newPolarity);
+    public event PolarityChangedDelegate OnPolarityChanged;
 
     EPolarity playerPolarity;
 
     public void setPlayerPolarity(EPolarity newPolarity)
     {
         playerPolarity = newPolarity;
+        OnPolarityChanged?.Invoke(playerPolarity);
     }
 
     public EPolarity getPLayerPolarity()
