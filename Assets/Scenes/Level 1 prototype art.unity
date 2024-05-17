@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Type B
       objectReference: {fileID: 0}
+    - target: {fileID: 1794599634929641398, guid: 8dac7e3dc1c10a5498d7aee420f02ccf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2409167937458498997, guid: 8dac7e3dc1c10a5498d7aee420f02ccf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -157,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5621950920955471472, guid: 8dac7e3dc1c10a5498d7aee420f02ccf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.21
+      value: 16.96
       objectReference: {fileID: 0}
     - target: {fileID: 5621950920955471472, guid: 8dac7e3dc1c10a5498d7aee420f02ccf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -341,10 +345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
-  isStatic: 0
+  isStatic: 1
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
 --- !u!50 &199068208
 Rigidbody2D:
@@ -507,7 +511,8 @@ Transform:
   m_LocalPosition: {x: 17, y: -5, z: 0}
   m_LocalScale: {x: 18, y: 13, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 386427225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &265689681
@@ -568,11 +573,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
-  isStatic: 0
+  isStatic: 1
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
-  tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
-  adjustedXValue: 0
+  tileAttachmentPoint: {fileID: 386427225}
+  adjustedXValue: 7.12
 --- !u!50 &265689683
 Rigidbody2D:
   serializedVersion: 4
@@ -839,9 +844,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePolarity: 2
   isStatic: 0
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
 --- !u!50 &276631093
 Rigidbody2D:
@@ -1339,6 +1344,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6951204492480245657, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
+      propertyPath: searchRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951204492480245657, guid: 4b3663414fbfd5d4fbe411f5e7842e74, type: 3}
       propertyPath: polarityResetTime
       value: 10
       objectReference: {fileID: 0}
@@ -1388,6 +1397,37 @@ Transform:
   - {fileID: 1641313876}
   - {fileID: 756436493}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &386427224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 386427225}
+  m_Layer: 6
+  m_Name: AttachmentPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &386427225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386427224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.248, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 265689680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -1724,10 +1764,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 2
-  isStatic: 0
+  isStatic: 1
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
 --- !u!50 &756436497
 Rigidbody2D:
@@ -1769,7 +1809,6 @@ GameObject:
   - component: {fileID: 763069560}
   - component: {fileID: 763069561}
   - component: {fileID: 763069562}
-  - component: {fileID: 763069563}
   m_Layer: 6
   m_Name: Negative
   m_TagString: Negative
@@ -1903,9 +1942,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePolarity: 1
   isStatic: 0
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0.2, y: 0, z: 0}
   adjustedXValue: 7.17
 --- !u!50 &763069562
 Rigidbody2D:
@@ -1934,41 +1973,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!58 &763069563
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763069557}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!1 &822784671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,9 +2203,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePolarity: 0
   isStatic: 0
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
 --- !u!50 &857654182
 Rigidbody2D:
@@ -2375,10 +2379,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 1
-  isStatic: 0
+  isStatic: 1
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
 --- !u!50 &1251005411
 Rigidbody2D:
@@ -2552,10 +2556,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 2
-  isStatic: 0
+  isStatic: 1
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
 --- !u!50 &1641313880
 Rigidbody2D:
@@ -2708,11 +2712,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1552343515198265366, guid: 986e438055e955040860c90e2377f925, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.9
+      value: 27.22
       objectReference: {fileID: 0}
     - target: {fileID: 1552343515198265366, guid: 986e438055e955040860c90e2377f925, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.42
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 1552343515198265366, guid: 986e438055e955040860c90e2377f925, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2750,6 +2754,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Type A (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4161154365051289575, guid: 986e438055e955040860c90e2377f925, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738230081958715039, guid: 986e438055e955040860c90e2377f925, type: 3}
+      propertyPath: adjustedXValue
+      value: 4.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738230081958715039, guid: 986e438055e955040860c90e2377f925, type: 3}
+      propertyPath: eTileColliderType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5738230081958715039, guid: 986e438055e955040860c90e2377f925, type: 3}
       propertyPath: tileAttachmentPoint
       value: 
@@ -2757,6 +2773,10 @@ PrefabInstance:
     - target: {fileID: 7102826533298171381, guid: 986e438055e955040860c90e2377f925, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558701131797807372, guid: 986e438055e955040860c90e2377f925, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

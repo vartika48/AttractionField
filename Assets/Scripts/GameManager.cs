@@ -6,6 +6,18 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
+    EPolarity playerPolarity;
+
+    public void setPlayerPolarity(EPolarity newPolarity)
+    {
+        playerPolarity = newPolarity;
+    }
+
+    public EPolarity getPLayerPolarity()
+    {
+        return playerPolarity;
+    }
+
     // Start is called before the first frame update
     private void Awake()
     {

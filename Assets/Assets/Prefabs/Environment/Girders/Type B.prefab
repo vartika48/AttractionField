@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7777640824228681908}
   - component: {fileID: 8045407813435181891}
   - component: {fileID: 4527711923143998167}
-  - component: {fileID: 1081663420905995094}
   - component: {fileID: -4016692849031910203}
   m_Layer: 0
   m_Name: Type B
@@ -185,41 +184,6 @@ MonoBehaviour:
   tileAttachmentPoint: {fileID: 0}
   collisionOffset: {x: 0, y: 0, z: 0}
   adjustedXValue: 0
---- !u!58 &1081663420905995094
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794599634929641398}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!114 &-4016692849031910203
 MonoBehaviour:
   m_ObjectHideFlags: 0
