@@ -124,20 +124,20 @@ public class Player : MonoBehaviour
     }
 
     // calculate edge offset of the tile to attach to player
-    Vector3 placementOffset(Transform objectTransform)
+    Vector3 placementOffset(Vector3 objectTransform)
     {
-        return new Vector3((objectTransform.localScale.x/2),0f,0f);
+        return new Vector3((objectTransform.x/2),0f,0f);
     }
 
     // Attract tile to player functionality 
-    void attractTile(GameObject tileToMove)
+    void attractTile(GameObject tileToMove, Vector3 placementOffsetAdjusted)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
         if(transform.position.x < grabPoint.position.x)
         {
             grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
             grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
-                                                                grabPoint.position+placementOffset(grabbedTile.transform)+collisionHandle,
+                                                                grabPoint.position+placementOffset(placementOffsetAdjusted)+collisionHandle,
                                                                 0.05f);
             //grabbedTile.transform.position = grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f);
         }
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
         {
             grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
             grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
-                                                                grabPoint.position-placementOffset(grabbedTile.transform)-collisionHandle,
+                                                                grabPoint.position-placementOffset(placementOffsetAdjusted)-collisionHandle,
                                                                 0.05f);
             // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
             //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
@@ -162,11 +162,13 @@ public class Player : MonoBehaviour
             grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
                                                                 transform.position+pointToMove,
                                                                 0.05f);
+            HitTileRef.setIsRepelled(true);
         }
         else
         {
             grabbedTile = null;
             isRepelled = false;
+            HitTileRef.setIsRepelled(false);
         }
     }
 
@@ -187,22 +189,22 @@ public class Player : MonoBehaviour
         ResetPolarity(); //Work later if needed
 
     }
-    Transform getPositionOfAttachment()
-    {
-        // Transform Position1 = grabbedTile.transform.Find("position1");
-        // Transform Position2 = grabbedTile.transform.Find("position2");
-        return transform;
+    // Transform getPositionOfAttachment()
+    // {
+    //     // Transform Position1 = grabbedTile.transform.Find("position1");
+    //     // Transform Position2 = grabbedTile.transform.Find("position2");
+    //     return transform;
         
-    }
+    // }
 
-    void attachObjects(GameObject grabbedObj, GameObject objToAttach)
-    {
-        Bounds boundGrabbedObj = grabbedObj.GetComponent<Renderer> ().bounds;
-        Bounds boundObjToAttach = objToAttach.GetComponent<Renderer>().bounds;
+    // void attachObjects(GameObject grabbedObj, GameObject objToAttach)
+    // {
+    //     Bounds boundGrabbedObj = grabbedObj.GetComponent<Renderer> ().bounds;
+    //     Bounds boundObjToAttach = objToAttach.GetComponent<Renderer>().bounds;
 
-        float GrabbedObjLeft = boundGrabbedObj.min.x;
-        float AttachObjRight = boundGrabbedObj.max.x;
-    }
+    //     float GrabbedObjLeft = boundGrabbedObj.min.x;
+    //     float AttachObjRight = boundGrabbedObj.max.x;
+    // }
 
     void HandleTiles()
     {
@@ -212,7 +214,7 @@ public class Player : MonoBehaviour
             {
                 if(HitTileRef.getTilePolarity()!=playerPolarity)
                 {
-                    attractTile(grabbedTile);
+                    attractTile(grabbedTile, grabbedTile.GetComponent<Tiles>().getAdjustedScale());
                 }
                 else if(HitTileRef.getTilePolarity()==playerPolarity)
                 {
@@ -228,6 +230,7 @@ public class Player : MonoBehaviour
                             Debug.Log("Random Location of Repel : "+randomRepelPoint);
                         }
                         repelTile(grabbedTile, randomRepelPoint);
+                        
                     }
                     
                     
@@ -266,6 +269,7 @@ public class Player : MonoBehaviour
                 
                 HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
 
+
                 if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
                 {
 
@@ -274,6 +278,7 @@ public class Player : MonoBehaviour
                         if(HitTileRef.getTilePolarity() != playerPolarity)
                         {
                             grabbedTile = hitInfo.collider.gameObject;
+                            HitTileRef.setIsGrabbed(true);
                             //HitTileRef.setIsGrabbed(true);
                         }
                     }
