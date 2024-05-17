@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4082639711128531890}
   - component: {fileID: 5738230081958715039}
   - component: {fileID: -8358599864442748963}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Type A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,10 +181,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePolarity: 0
   isStatic: 0
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
-  adjustedXValue: 0
+  adjustedXValue: 4
 --- !u!114 &-8358599864442748963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2589526122364854081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
