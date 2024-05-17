@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Positve
+  - Positive locked
+  - Negative
+  - Negative locked
   layers:
   - Default
   - TransparentFX
