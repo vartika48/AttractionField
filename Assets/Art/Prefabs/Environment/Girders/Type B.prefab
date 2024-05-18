@@ -198,5 +198,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteNames:
-  - 
-  sprites: []
+  - Neutral_Right_Female
+  - Neutral_Open_Female
+  - Neutral_Bottom_Female
+  - Neutral_Open_Male
+  - Negative_Movable_Right_Female
+  - Negative_Movable_Open_Female
+  - Negative_Movable_Bottom_Female
+  - Negative_Movable_Open_Male
+  - Negative_Fixed_Right_Female
+  - Negative_Fixed_Open_Female
+  - Negative_Fixed_Bottom_Female
+  - Negative_Fixed_Open_Male
+  - Positive_Movable_Right_Female
+  - Positive_Movable_Open_Female
+  - Positive_Movable_Bottom_Female
+  - Positive_Movable_Open_Male
+  - Positive_Fixed_Right_Female
+  - Positive_Fixed_Open_Female
+  - Positive_Fixed_Bottom_Female
+  - Positive_Fixed_Open_Female
+  sprites:
+  - {fileID: 662489085, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -2128333645, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 1455601344, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 1493414371, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -1842544891, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: -1111898579, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 980413459, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: -1977614407, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 2108423970, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1188078406, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1043941442, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -547238012, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1029150813, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -568159795, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -1220088378, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -1517151184, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -2134751281, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 886998963, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 187706414, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 2122220710, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}

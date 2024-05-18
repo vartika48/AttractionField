@@ -99,8 +99,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cca8ffa76a1fa64fab58347173aa8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteNames: []
-  sprites: []
+  spriteNames:
+  - Neutral_Open_Female
+  - Neutral_Left_Female
+  - Negative_Movable_Open_Female
+  - Negative_Movable_Left_Female
+  - Negative_Fixed_Open_Female
+  - Negative_Fixed_Left_Female
+  - Positive_Movable_Open_Female
+  - Positive_Movable_Left_Female
+  - Positive_Fixed_Open_Female
+  - Positive_Fixed_Left_Female
+  sprites:
+  - {fileID: 1348130781, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -1811947833, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -1439341352, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 1244635811, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 1549176787, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1497117762, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -557032096, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -1806244105, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -319032302, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: -1624883523, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
 --- !u!114 &1100006776081110233
 MonoBehaviour:
   m_ObjectHideFlags: 0
