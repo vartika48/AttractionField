@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] float maxExclusiveRepel;   //maximum exclusive repel distance
     [SerializeField] float searchRadius;
     [SerializeField] float polarityResetdelay;
+    Coroutine resetTimerCoroutine;
 
     float rayDistance;
     private GameObject grabbedTile;             // reference for grabbed 
@@ -97,14 +98,15 @@ public class Player : MonoBehaviour
             if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
             {
                 setPolarity(EPolarity.Negative);
-                StartCoroutine(ActivatePolarity(polarityResetdelay));
+                
             }
             else if(playerPolarity==EPolarity.Negative)
             {
                 setPolarity(EPolarity.Positive);
-                StartCoroutine(ActivatePolarity(polarityResetdelay));
             }
             Debug.Log("Player Polarity = "+playerPolarity);
+
+            resetTimerCoroutine = StartCoroutine(ActivatePolarity(polarityResetdelay));
         }
     }
 
@@ -352,6 +354,7 @@ public class Player : MonoBehaviour
                             {
                                 grabbedTile = hitInfo.collider.gameObject;
                                 HitTileRef.setIsGrabbed(true);
+                                StopCoroutine(resetTimerCoroutine);
                             }
                         }
                     }
