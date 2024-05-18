@@ -177,11 +177,7 @@ MonoBehaviour:
   eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-<<<<<<< Updated upstream:Assets/Art/Prefabs/Environment/Girders/Type C.prefab
-  adjustedXValue: 7.15
-=======
   adjustedXValue: 0
->>>>>>> Stashed changes:Assets/Assets/Prefabs/Environment/Girders/Type C.prefab
 --- !u!114 &-4270265619662700802
 MonoBehaviour:
   m_ObjectHideFlags: 0
