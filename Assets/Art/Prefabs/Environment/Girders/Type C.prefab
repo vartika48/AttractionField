@@ -194,8 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71072ca2ce7f1c4bb43242fe255ff02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteNames: []
-  sprites: []
   spriteNames:
   - Neutral_right_female
   - Neutral_left_open
