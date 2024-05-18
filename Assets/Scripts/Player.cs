@@ -1,6 +1,8 @@
 
 
 using System.Collections;
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 
@@ -13,19 +15,25 @@ public class Player : MonoBehaviour
     [SerializeField] Transform grabPoint;       //transform point where player will grab the tiles
     [SerializeField] Transform rayPoint;        //Raycast Emittor point
     [SerializeField] float polarityResetTime;  //Player polarity reset time
-
     [SerializeField] float minInclusiveRepel;   //minimum inclusive repel distance
     [SerializeField] float maxExclusiveRepel;   //maximum exclusive repel distance
+    [SerializeField] float searchRadius;
+    [SerializeField] float polarityResetdelay;
+    Coroutine resetTimerCoroutine;
 
     float rayDistance;
     private GameObject grabbedTile;             // reference for grabbed 
     
-    private GameObject tileToBridge;
+    //private GameObject tileToBridge;
     private int layerIndex;
     bool isPolarityTimerActive;                 // bool to check if reset polarity timer is active               
-    Vector3 randomRepelPoint;                   
+    Vector3 randomRepelPoint; 
+
+    float disCheck;                  
 
     bool isRepelled;                            //is tile has reached the random repel point
+
+    RaycastHit2D hitInfo;
 
     private float horizontal;
     private bool isFacingRight = true;          // bool to check if player facing right
@@ -36,9 +44,11 @@ public class Player : MonoBehaviour
 
     Tiles HitTileRef;
 
-    Tiles TileToAttachRef;
+    //Tiles TileToAttachRef;
 
     Vector3 collisionHandle = new Vector3(0.1f,0f,0f);
+
+    Tiles tempClosestTile = null;
 
     void Awake() 
     {
@@ -52,6 +62,7 @@ public class Player : MonoBehaviour
         layerIndex = LayerMask.NameToLayer("Ground");
         Debug.Log(layerIndex);
         playerPolarity = EPolarity.Negative;
+        disCheck = 0f;
     }
 
     //Function to Check if Player is Ground
@@ -87,12 +98,15 @@ public class Player : MonoBehaviour
             if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
             {
                 setPolarity(EPolarity.Negative);
+                
             }
             else if(playerPolarity==EPolarity.Negative)
             {
                 setPolarity(EPolarity.Positive);
             }
-            Debug.Log(playerPolarity);
+            Debug.Log("Player Polarity = "+playerPolarity);
+
+            resetTimerCoroutine = StartCoroutine(ActivatePolarity(polarityResetdelay));
         }
     }
 
@@ -124,28 +138,66 @@ public class Player : MonoBehaviour
     }
 
     // calculate edge offset of the tile to attach to player
-    Vector3 placementOffset(Transform objectTransform)
+    Vector3 placementOffset(Vector3 objectTransform)
     {
-        return new Vector3((objectTransform.localScale.x/2),0f,0f);
+        return new Vector3((objectTransform.x/2),0f,0f);
     }
 
     // Attract tile to player functionality 
-    void attractTile(GameObject tileToMove)
+    void attractTile(GameObject tileToMove, Vector3 placementOffsetAdjusted, Tiles tileCompRef)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
         if(transform.position.x < grabPoint.position.x)
         {
-            grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
-            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
-                                                                grabPoint.position+placementOffset(grabbedTile.transform)+collisionHandle,
+            if(tileCompRef.getTileColliderType()==ETileColliderType.Box)
+            tileToMove.GetComponent<BoxCollider2D>().isTrigger = true;
+            else
+            tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
+                                                                grabPoint.position+placementOffset(placementOffsetAdjusted)+collisionHandle,
                                                                 0.05f);
             //grabbedTile.transform.position = grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f);
         }
         else
         {
-            grabbedTile.GetComponent<BoxCollider2D>().isTrigger = true;
-            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
-                                                                grabPoint.position-placementOffset(grabbedTile.transform)-collisionHandle,
+            if(tileCompRef.getTileColliderType()==ETileColliderType.Box)
+            tileToMove.GetComponent<BoxCollider2D>().isTrigger = true;
+            else
+            tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
+                                                                grabPoint.position-placementOffset(placementOffsetAdjusted)-collisionHandle,
+                                                                0.05f);
+            // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
+            //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+    }
+
+    void attractTileToStatic(GameObject tileToMove, Vector3 placementOffsetAdjusted,GameObject otherTile, Tiles tileToMoveCompRef)
+    {
+        tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
+        if(tileToMove.transform.position.x < otherTile.gameObject.transform.position.x)
+        {
+            if(tileToMoveCompRef.getTileColliderType()==ETileColliderType.Box)
+            tileToMove.GetComponent<BoxCollider2D>().isTrigger = true;
+            else
+            tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
+                                                                otherTile.GetComponent<Tiles>().getTileAttachmentPoint().position-placementOffset(placementOffsetAdjusted)+collisionHandle,
+                                                                0.05f);
+            //grabbedTile.transform.position = grabPoint.position+placementOffset(grabbedTile.transform)+new Vector3(0.1f,0f,0f);
+        }
+        else
+        {
+            if(tileToMoveCompRef.getTileColliderType()==ETileColliderType.Box)
+            tileToMove.GetComponent<BoxCollider2D>().isTrigger = true;
+            else
+            tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
+                                                                otherTile.GetComponent<Tiles>().getTileAttachmentPoint().position+collisionHandle,
                                                                 0.05f);
             // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
             //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
@@ -156,17 +208,20 @@ public class Player : MonoBehaviour
     void repelTile(GameObject tileToMove, Vector3 pointToMove)
     {
         tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
-        if(grabbedTile.transform.position != (transform.position+pointToMove))
+        if(tileToMove.transform.position != (transform.position+pointToMove))
         {
             isRepelled=true;
-            grabbedTile.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
+            tileToMove.transform.position = Vector3.MoveTowards(grabbedTile.transform.position, 
                                                                 transform.position+pointToMove,
                                                                 0.05f);
+            HitTileRef.setIsRepelled(true);
         }
         else
         {
+            HitTileRef.setIsRepelled(false);
             grabbedTile = null;
             isRepelled = false;
+            HitTileRef = null;
         }
     }
 
@@ -187,22 +242,6 @@ public class Player : MonoBehaviour
         ResetPolarity(); //Work later if needed
 
     }
-    Transform getPositionOfAttachment()
-    {
-        // Transform Position1 = grabbedTile.transform.Find("position1");
-        // Transform Position2 = grabbedTile.transform.Find("position2");
-        return transform;
-        
-    }
-
-    void attachObjects(GameObject grabbedObj, GameObject objToAttach)
-    {
-        Bounds boundGrabbedObj = grabbedObj.GetComponent<Renderer> ().bounds;
-        Bounds boundObjToAttach = objToAttach.GetComponent<Renderer>().bounds;
-
-        float GrabbedObjLeft = boundGrabbedObj.min.x;
-        float AttachObjRight = boundGrabbedObj.max.x;
-    }
 
     void HandleTiles()
     {
@@ -212,13 +251,48 @@ public class Player : MonoBehaviour
             {
                 if(HitTileRef.getTilePolarity()!=playerPolarity)
                 {
-                    attractTile(grabbedTile);
+                    attractTile(grabbedTile, grabbedTile.GetComponent<Tiles>().getAdjustedScale(), HitTileRef);
                 }
                 else if(HitTileRef.getTilePolarity()==playerPolarity)
                 {
-                    if(HitTileRef.gettIsAvailableForAttachment())
+                    Debug.LogWarning("Repel + "+tempClosestTile);
+                    if(tempClosestTile == null && grabbedTile)
+                    {   
+                        Debug.LogWarning("Temp Closest tile is null");
+                        tempClosestTile = findClosestOppositePolarityStaticTile();
+                    }
+                    if(tempClosestTile)
                     {
+                        Debug.Log("Temp Closed Tile Not Null"+tempClosestTile);
+                        attractTileToStatic(grabbedTile,tempClosestTile.getAdjustedScale(),tempClosestTile.GameObject(),HitTileRef);
+
+                        Vector3 tempGrabbedTilePos = (grabbedTile.transform.position+placementOffset(HitTileRef.getAdjustedScale()));
+
+                        Vector3 tempStaticTilePos = (tempClosestTile.gameObject.transform.position-placementOffset(tempClosestTile.getAdjustedScale()));
+
+                        //Debug.LogWarning("Grabbed Tile Position = "+tempGrabbedTilePos);
+                        //Debug.Log("Static Tile Position = "+tempStaticTilePos);
                         
+
+
+                        disCheck = Vector3.Distance(tempGrabbedTilePos, tempStaticTilePos);
+
+                        Debug.Log("DisCHECK = "+disCheck);
+                        if(disCheck < 1)
+                        {
+                            Debug.Log("Positions are Equal");
+
+                            if(HitTileRef.getTileColliderType()==ETileColliderType.Box)
+                            grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
+                            else
+                            grabbedTile.GetComponent<PolygonCollider2D>().isTrigger = false;
+
+                            grabbedTile=null;
+                            Debug.LogWarning("grabbedTile Nulled");
+                            tempClosestTile =null;
+                            HitTileRef = null;
+                            
+                        }
                     }
                     else
                     {
@@ -229,16 +303,12 @@ public class Player : MonoBehaviour
                         }
                         repelTile(grabbedTile, randomRepelPoint);
                     }
-                    
-                    
-
                 }
             }
             else
             {
 
             }
-
         }
     }
 
@@ -253,54 +323,90 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
     }
-
     void GrabTiles()
     {
         if(Input.GetMouseButtonDown(0))
         {   
             Vector3 touchPos = getTouchPosition();
+
+            Debug.Log(touchPos);
+
             if(!grabbedTile)
             {
+
+                Debug.Log("Grabbed Tile is NULL");
+                hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
                 
-                RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
-                
+
+
                 HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
 
-                if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
-                {
+                Debug.Log(HitTileRef.gameObject);
 
-                    if (HitTileRef.getTilePolarity() != EPolarity.Neutral)
+                if(hitInfo)
+                {
+                    if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex && !HitTileRef.getIsStatic())  
                     {
-                        if(HitTileRef.getTilePolarity() != playerPolarity)
+
+                        if (HitTileRef.getTilePolarity() != EPolarity.Neutral)
                         {
-                            grabbedTile = hitInfo.collider.gameObject;
-                            //HitTileRef.setIsGrabbed(true);
+                            if(HitTileRef.getTilePolarity() != playerPolarity)
+                            {
+                                grabbedTile = hitInfo.collider.gameObject;
+                                HitTileRef.setIsGrabbed(true);
+                                StopCoroutine(resetTimerCoroutine);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    Debug.Log("No Tile Found !!");
+                }
+                
 
             }
-            // else if (grabbedTile)
-            // {
-            //     RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, touchPos-rayPoint.transform.position, 10f, groundLayer);
-                
-            //     HitTileRef = hitInfo.collider.gameObject.GetComponent<Tiles>();
-
-            //     if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex) 
-            //     {
-            //         if(HitTileRef.getTilePolarity() != playerPolarity && !HitTileRef.getIsStatic())
-            //         {
-            //             tileToBridge = hitInfo.collider.gameObject;
-            //         }
-            //     }
-
-
-            // }
+            else
+            Debug.Log("Grabbed Tile is Not Null");
         }
     }
 
-}
+    Tiles findClosestOppositePolarityStaticTile()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(grabbedTile.transform.position, searchRadius);
+        Tiles closestTile = null;
+        float closestDistance = Mathf.Infinity;
 
+        foreach (Collider2D collider in colliders)
+        {
+            if(collider.gameObject.layer == layerIndex)
+            {
+                Tiles tile = collider.GetComponent<Tiles>();
+                Debug.Log("Tiles Found = "+tile.gameObject);
+
+                if(tile.getTilePolarity() != EPolarity.Neutral)
+                {
+                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() != tile.getTilePolarity() )
+                    {
+                        float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
+                        if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestTile = tile;
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        Debug.Log("Closest Tile Returned = "+closestTile);
+        return closestTile;
+    }
+
+    
+
+}
 public enum EPolarity
     {
         Positive,

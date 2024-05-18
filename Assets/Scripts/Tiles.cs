@@ -1,4 +1,6 @@
 
+
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,23 +11,30 @@ public class Tiles : MonoBehaviour
 
     [SerializeField] EPolarity tilePolarity;
     [SerializeField] bool isStatic;
+    [SerializeField] ETileColliderType eTileColliderType;
     [SerializeField] Transform playerAttachmentPoint;
     [SerializeField] Transform tileAttachmentPoint;
     
-    [SerializeField] Vector3 collisionOffset;
+    //[SerializeField] Vector3 collisionOffset;
+    [SerializeField] float adjustedXValue;
 
     //[SerializeField] GameObject tilemanager;
-
     BoxCollider2D tileCollider;
     Rigidbody2D rb;
 
+    Vector3 adjustedScale;
     [SerializeField] TileData data;
+    float distanceThreshold;
 
-    //SpriteRenderer sr;
 
-    public Tiles TileAvailable;
+    Tiles otherTileRef;
+    Tiles TileAvailable;
 
     bool isAttachedSomewhere;
+
+    bool isRepelled;
+
+    bool isGrabbed;
 
     
     //bool isGrabbed;
@@ -46,7 +55,11 @@ public class Tiles : MonoBehaviour
         isAttachedSomewhere = false;
         else
         isAttachedSomewhere = true;
-        collisionOffset = new Vector3(0.1f,0.1f,0);
+
+        adjustedScale = new Vector3(adjustedXValue,0f,0f);
+
+        distanceThreshold = 1f;
+        isRepelled = false;
     }
 
     public EPolarity getTilePolarity()
@@ -64,14 +77,34 @@ public class Tiles : MonoBehaviour
         return isStatic;
     }
 
-    // public void setIsAvailableForAttachment(bool available)
-    // {
-    //     availableForAttachment = available;
-    // }
+    public bool getIsRepelled()
+    {
+        return isRepelled;
+    }
+
+    public void setIsRepelled(bool newValue)
+    {
+        isRepelled = newValue;
+    }
+
+    public Vector3 getAdjustedScale()
+    {
+        return adjustedScale;
+    }
 
     public bool gettIsAvailableForAttachment()
     {
         return availableForAttachment;
+    }
+
+    public void setIsGrabbed(bool newValue)
+    {
+        isGrabbed = newValue;
+    }
+
+    public Transform getTileAttachmentPoint()
+    {
+        return tileAttachmentPoint;
     }
 
     // Attract tile to player functionality 
@@ -82,14 +115,14 @@ public class Tiles : MonoBehaviour
         {
             tileCollider.isTrigger = true;
             transform.position = Vector3.MoveTowards(transform.position,
-                                                      grabPoint.position + PlacementOffset(transform) + collisionHandle,
+                                                      grabPoint.position + PlacementOffset(adjustedScale) + collisionHandle,
                                                       0.05f);
         }
         else
         {
             tileCollider.isTrigger = true;
             transform.position = Vector3.MoveTowards(transform.position,
-                                                      grabPoint.position - PlacementOffset(transform) - collisionHandle,
+                                                      grabPoint.position - PlacementOffset(adjustedScale) - collisionHandle,
                                                       0.05f);
         }
     }
@@ -107,38 +140,21 @@ public class Tiles : MonoBehaviour
     }
 
     // Calculate edge offset of the tile to attach to player
-    private Vector3 PlacementOffset(Transform objectTransform)
+    private Vector3 PlacementOffset(Vector3 objectTransform)
     {
-        return new Vector3((objectTransform.localScale.x / 2), 0f, 0f);
+        return new Vector3((objectTransform.x / 2), 0f, 0f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    public ETileColliderType getTileColliderType()
     {
-        Tiles otherTileRef = other.gameObject.GetComponent<Tiles>();
-        if(otherTileRef.getTilePolarity() != tilePolarity && !otherTileRef.getIsStatic() && !isAttachedSomewhere)
-        {
-            availableForAttachment = true;
-            TileAvailable = otherTileRef;
-            // Renderer renderer = other.gameObject.GetComponentInParent<Renderer>();
-            // if (renderer != null)
-            // {
-            //     Bounds bounds = renderer.bounds;
-            //     Vector3 positionOfAttach = new Vector3(bounds.min.x, bounds.center.y, 0f);
-
-                
-
-            // }
-
-            Transform child = TileAvailable.transform.Find("AnchorPoint");
-
-            while( transform != child )
-                {
-                    AttractTile(child,collisionOffset);
-                }
-             
-
-        }       
+        return eTileColliderType;
     }
 
     
 }
+
+public enum ETileColliderType
+    {
+        Box,
+        Polygon
+    };

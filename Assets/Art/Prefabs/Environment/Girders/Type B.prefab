@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4161154365051289575
+--- !u!1 &1794599634929641398
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1552343515198265366}
-  - component: {fileID: 1307460596279873624}
-  - component: {fileID: 7102826533298171381}
-  - component: {fileID: 4082639711128531890}
-  - component: {fileID: 5738230081958715039}
-  - component: {fileID: 1285260821941562819}
-  - component: {fileID: -8358599864442748963}
-  m_Layer: 0
-  m_Name: Type A
+  - component: {fileID: 5621950920955471472}
+  - component: {fileID: 2409167937458498997}
+  - component: {fileID: 7777640824228681908}
+  - component: {fileID: 8045407813435181891}
+  - component: {fileID: 4527711923143998167}
+  - component: {fileID: -4016692849031910203}
+  m_Layer: 6
+  m_Name: Type B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1552343515198265366
+--- !u!4 &5621950920955471472
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
+  m_GameObject: {fileID: 1794599634929641398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.79, y: 0.1, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1307460596279873624
+--- !u!212 &2409167937458498997
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
+  m_GameObject: {fileID: 1794599634929641398}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 170307452, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  m_Sprite: {fileID: -2128333645, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,13 +88,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7102826533298171381
+--- !u!60 &7777640824228681908
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
+  m_GameObject: {fileID: 1794599634929641398}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -125,7 +124,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28515625, y: 0.38297865}
+    oldSize: {x: 0.28710938, y: 0.38297865}
     newSize: {x: 0.28515625, y: 0.38297865}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -133,21 +132,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.14025223, y: -0.1881632}
-      - {x: 0.14087461, y: -0.18703322}
-      - {x: 0.14125785, y: -0.09416131}
-      - {x: -0.046370983, y: -0.093998365}
-      - {x: -0.046395503, y: 0.18834111}
-      - {x: -0.14037012, y: 0.18833704}
+    - - {x: -0.14370717, y: 0.19333726}
+      - {x: -0.14370717, y: 0.090340436}
+      - {x: -0.13912953, y: 0.090340436}
+      - {x: 0.043355342, y: 0.09041932}
+      - {x: 0.043765873, y: -0.19118422}
+      - {x: 0.14468394, y: -0.19118422}
+      - {x: 0.14468394, y: 0.19333726}
   m_UseDelaunayMesh: 0
---- !u!50 &4082639711128531890
+--- !u!50 &8045407813435181891
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
+  m_GameObject: {fileID: 1794599634929641398}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -167,13 +167,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &5738230081958715039
+--- !u!114 &4527711923143998167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
+  m_GameObject: {fileID: 1794599634929641398}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd4a8dddd19236f40b0b0f57c19619db, type: 3}
@@ -181,54 +181,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePolarity: 0
   isStatic: 0
+  eTileColliderType: 0
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
-  collisionOffset: {x: 0, y: 0, z: 0}
-  TileAvailable: {fileID: 0}
---- !u!58 &1285260821941562819
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
---- !u!114 &-8358599864442748963
+  adjustedXValue: 4
+--- !u!114 &-4016692849031910203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4161154365051289575}
+  m_GameObject: {fileID: 1794599634929641398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca3e3e4806d88b498273f3c2ccc81c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e1847d47053a4147b26ced4d6db2c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteNames:
+  - Neutral_Right_Female
+  - Neutral_Open_Female
+  - Neutral_Bottom_Female
+  - Neutral_Open_Male
+  - Negative_Movable_Right_Female
+  - Negative_Movable_Open_Female
+  - Negative_Movable_Bottom_Female
+  - Negative_Movable_Open_Male
+  - Negative_Fixed_Right_Female
+  - Negative_Fixed_Open_Female
+  - Negative_Fixed_Bottom_Female
+  - Negative_Fixed_Open_Male
+  - Positive_Movable_Right_Female
+  - Positive_Movable_Open_Female
+  - Positive_Movable_Bottom_Female
+  - Positive_Movable_Open_Male
+  - Positive_Fixed_Right_Female
+  - Positive_Fixed_Open_Female
+  - Positive_Fixed_Bottom_Female
+  - Positive_Fixed_Open_Female
+  sprites:
+  - {fileID: 662489085, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -2128333645, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 1455601344, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 1493414371, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -1842544891, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: -1111898579, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 980413459, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: -1977614407, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 2108423970, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1188078406, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1043941442, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -547238012, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -1029150813, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -568159795, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -1220088378, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -1517151184, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -2134751281, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 886998963, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 187706414, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 2122220710, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
