@@ -197,8 +197,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca3e3e4806d88b498273f3c2ccc81c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteNames: []
-  sprites: []
+  spriteNames:
+  - Neutral_Right_Female
+  - Neutral_Open_Female
+  - Neutral_Top_Female
+  - Neutral_Open_Male
+  - Negative_Movable_Right_female
+  - Negative_Movable_Open_female
+  - Negative_Movable_Top_female
+  - Negative_Movable_Open_Male
+  - Negative_Fixed_Right_Female
+  - Negative_Fixed_Open_Female
+  - Negative_Fixed_Top_Female
+  - Negative_Fixed_Open_Male
+  - Positive_Movable_Right_Female
+  - Positive_Movable_Open_Female
+  - Positive_Movable_Top_Female
+  - Positive_Movable_Open_Male
+  - Positive_Fixed_Right_Female
+  - Positive_Fixed_Open_Female
+  - Positive_Fixed_Top_Female
+  - Positive_Fixed_Open_Male
+  sprites:
+  - {fileID: -1281392683, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 1326898945, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: -1554499384, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 1549209938, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  - {fileID: 132745550, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 1117154357, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: -847924325, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 1444510040, guid: d5bb2f2ff57a5f74d9727ba2d3245e61, type: 3}
+  - {fileID: 769742681, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: 1927330078, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: 136823547, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: -751501974, guid: d39168a46a6634f49b3bcaf5347c65d9, type: 3}
+  - {fileID: 770534584, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: -250614035, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: 2095448062, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: 121296374, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
+  - {fileID: 1939770858, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 865046335, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 225081675, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+  - {fileID: 1337400480, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
 --- !u!1 &8558701131797807372
 GameObject:
   m_ObjectHideFlags: 0
