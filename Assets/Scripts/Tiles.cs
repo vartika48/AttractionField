@@ -17,6 +17,7 @@ public class Tiles : MonoBehaviour
     
     //[SerializeField] Vector3 collisionOffset;
     [SerializeField] float adjustedXValue;
+    [SerializeField] bool hasAttachmentPoint;
 
     //[SerializeField] GameObject tilemanager;
     BoxCollider2D tileCollider;
@@ -90,6 +91,11 @@ public class Tiles : MonoBehaviour
     public Vector3 getAdjustedScale()
     {
         return adjustedScale;
+    }
+
+    public bool getHasAttachmentPoint()
+    {
+        return hasAttachmentPoint;
     }
 
     public bool gettIsAvailableForAttachment()

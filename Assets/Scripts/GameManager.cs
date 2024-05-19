@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
         OnPolarityChanged?.Invoke(playerPolarity);
     }
 
+    public void LevelCompleted()
+    {
+        OnLevelCompleted?.Invoke();
+    }
+
     public EPolarity getPLayerPolarity()
     {
         return playerPolarity;

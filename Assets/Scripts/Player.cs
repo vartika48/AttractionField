@@ -98,11 +98,13 @@ public class Player : MonoBehaviour
             if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
             {
                 setPolarity(EPolarity.Negative);
+                GameManager.instance.setPlayerPolarity(playerPolarity);
                 
             }
             else if(playerPolarity==EPolarity.Negative)
             {
                 setPolarity(EPolarity.Positive);
+                GameManager.instance.setPlayerPolarity(playerPolarity);
             }
             Debug.Log("Player Polarity = "+playerPolarity);
 
@@ -197,7 +199,7 @@ public class Player : MonoBehaviour
             tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
 
             tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
-                                                                otherTile.GetComponent<Tiles>().getTileAttachmentPoint().position+collisionHandle,
+                                                                otherTile.GetComponent<Tiles>().getTileAttachmentPoint().position+placementOffset(placementOffsetAdjusted)+collisionHandle,
                                                                 0.05f);
             // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
             //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
@@ -230,6 +232,7 @@ public class Player : MonoBehaviour
     {
         isPolarityTimerActive = false;
         setPolarity(EPolarity.Neutral);
+        GameManager.instance.setPlayerPolarity(playerPolarity);
         Debug.Log("Value reset to Neutral");
     }
 
@@ -269,7 +272,12 @@ public class Player : MonoBehaviour
 
                         Vector3 tempGrabbedTilePos = (grabbedTile.transform.position+placementOffset(HitTileRef.getAdjustedScale()));
 
-                        Vector3 tempStaticTilePos = (tempClosestTile.gameObject.transform.position-placementOffset(tempClosestTile.getAdjustedScale()));
+                        Vector3 tempStaticTilePos;
+
+                        if(grabbedTile.transform.position.x < tempClosestTile.gameObject.transform.position.x)
+                        tempStaticTilePos = (tempClosestTile.gameObject.transform.position-placementOffset(tempClosestTile.getAdjustedScale()));
+                        else
+                        tempStaticTilePos = ((tempClosestTile.gameObject.transform.position+placementOffset(tempClosestTile.getAdjustedScale()))+tempClosestTile.getAdjustedScale());
 
                         //Debug.LogWarning("Grabbed Tile Position = "+tempGrabbedTilePos);
                         //Debug.Log("Static Tile Position = "+tempStaticTilePos);
@@ -279,7 +287,7 @@ public class Player : MonoBehaviour
                         disCheck = Vector3.Distance(tempGrabbedTilePos, tempStaticTilePos);
 
                         Debug.Log("DisCHECK = "+disCheck);
-                        if(disCheck < 1)
+                        if(disCheck < 1 )
                         {
                             Debug.Log("Positions are Equal");
 
@@ -387,7 +395,7 @@ public class Player : MonoBehaviour
 
                 if(tile.getTilePolarity() != EPolarity.Neutral)
                 {
-                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() != tile.getTilePolarity() )
+                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() != tile.getTilePolarity() && tile.getHasAttachmentPoint() )
                     {
                         float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
                         if (distance < closestDistance)
@@ -405,7 +413,15 @@ public class Player : MonoBehaviour
         return closestTile;
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        // if(other.gameObject.tag=="Finish");
+        // {
+        //     Debug.Log("Level Finished");
+        //     GameManager.instance.LevelCompleted();
+        // }
+        
+    }
 
 }
 public enum EPolarity
