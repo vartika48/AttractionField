@@ -7,7 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public delegate void PolarityChangedDelegate(EPolarity newPolarity);
+
+    public delegate void LevelCompleteDelegate();
+    
     public event PolarityChangedDelegate OnPolarityChanged;
+
+    public event LevelCompleteDelegate OnLevelCompleted;
 
     EPolarity playerPolarity;
 

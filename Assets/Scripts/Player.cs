@@ -239,6 +239,7 @@ public class Player : MonoBehaviour
         //setPolarity(polarity);
         isPolarityTimerActive=true;
         yield return new WaitForSeconds(resetdelay);
+        if(!grabbedTile)
         ResetPolarity(); //Work later if needed
 
     }
