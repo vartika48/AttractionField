@@ -6,36 +6,58 @@ using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
-    GameManager gameManager = GameManager.instance;
+    GameManager gameManager;
 
     [SerializeField] TextMeshProUGUI playerPolarityText;
-    //[SerializeField] RectTransform LevelCompleteScreen;
+    [SerializeField] RectTransform LevelCompleteScreen;
 
+
+    private void Awake() 
+    {
+        gameManager = GameManager.GetInstance();
+    }
     private void UpdatePlayerPolarityText(EPolarity newPolarity)
     {
+        Debug.Log("Player Polarity Change");
         playerPolarityText.text = "Player Polarity : "+newPolarity.ToString();
     }
 
     private void OnEnable()
     {
-        GameManager.instance.OnPolarityChanged += UpdatePlayerPolarityText;
-        //GameManager.instance.OnLevelCompleted += LevelCompleted;
+        if(gameManager == null)
+        {
+            gameManager.OnPolarityChanged += UpdatePlayerPolarityText;
+            gameManager.OnLevelCompleted += LevelCompleted;
+        }
+        else
+        {
+            Debug.Log("Game Manager is Null");
+        }
+        
     }
 
-    // private void LevelCompleted()
-    // {
-    //     LevelCompleteScreen.gameObject.SetActive(true);
-    // }
-
-    private void Awake() 
+    private void OnDisable() 
     {
-        
+        if(gameManager == null)
+        {
+            gameManager.OnPolarityChanged -= UpdatePlayerPolarityText;
+            gameManager.OnLevelCompleted -= LevelCompleted;
+        }
+        else
+        {
+            Debug.Log("Game Manager is Null");
+        }
+    }
+
+    private void LevelCompleted()
+    {
+        LevelCompleteScreen.gameObject.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //LevelCompleteScreen.gameObject.SetActive(false);
+        LevelCompleteScreen.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

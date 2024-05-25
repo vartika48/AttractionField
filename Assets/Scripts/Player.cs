@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     
     //private GameObject tileToBridge;
     private int layerIndex;
-    bool isPolarityTimerActive;                 // bool to check if reset polarity timer is active               
+    bool isPolarityTimerActive=false;                 // bool to check if reset polarity timer is active               
     Vector3 randomRepelPoint; 
 
     float disCheck;                  
@@ -279,11 +279,6 @@ public class Player : MonoBehaviour
                         else
                         tempStaticTilePos = ((tempClosestTile.gameObject.transform.position+placementOffset(tempClosestTile.getAdjustedScale()))+tempClosestTile.getAdjustedScale());
 
-                        //Debug.LogWarning("Grabbed Tile Position = "+tempGrabbedTilePos);
-                        //Debug.Log("Static Tile Position = "+tempStaticTilePos);
-                        
-
-
                         disCheck = Vector3.Distance(tempGrabbedTilePos, tempStaticTilePos);
 
                         Debug.Log("DisCHECK = "+disCheck);
@@ -411,16 +406,6 @@ public class Player : MonoBehaviour
         }
         Debug.Log("Closest Tile Returned = "+closestTile);
         return closestTile;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) 
-    {
-        // if(other.gameObject.tag=="Finish");
-        // {
-        //     Debug.Log("Level Finished");
-        //     GameManager.instance.LevelCompleted();
-        // }
-        
     }
 
 }
