@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public void setPlayerPolarity(EPolarity newPolarity)
     {
+        Debug.Log("Change Delegated");
         playerPolarity = newPolarity;
         OnPolarityChanged?.Invoke(playerPolarity);
     }

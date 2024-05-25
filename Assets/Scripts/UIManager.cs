@@ -14,7 +14,15 @@ public class UIManager : MonoBehaviour
 
     private void Awake() 
     {
-        gameManager = GameManager.GetInstance();
+        if (gameManager != null)
+        {
+            gameManager.OnPolarityChanged += UpdatePlayerPolarityText;
+            gameManager.OnLevelCompleted += LevelCompleted;
+        }
+        else
+        {
+            Debug.LogError("GameManager is not assigned in OnEnable.");
+        }
     }
     private void UpdatePlayerPolarityText(EPolarity newPolarity)
     {
@@ -36,18 +44,18 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void OnDisable() 
-    {
-        if(gameManager == null)
-        {
-            gameManager.OnPolarityChanged -= UpdatePlayerPolarityText;
-            gameManager.OnLevelCompleted -= LevelCompleted;
-        }
-        else
-        {
-            Debug.Log("Game Manager is Null");
-        }
-    }
+    // private void OnDisable() 
+    // {
+    //     if(gameManager == null)
+    //     {
+    //         gameManager.OnPolarityChanged -= UpdatePlayerPolarityText;
+    //         gameManager.OnLevelCompleted -= LevelCompleted;
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Game Manager is Null");
+    //     }
+    // }
 
     private void LevelCompleted()
     {

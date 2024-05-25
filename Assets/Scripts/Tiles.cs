@@ -9,7 +9,7 @@ public class Tiles : MonoBehaviour
 
    // [SerializeField] string TileSpriteName;
 
-    [SerializeField] EPolarity tilePolarity;
+    [SerializeField] EPolarity tilePolarity = EPolarity.Neutral;
     [SerializeField] bool isStatic;
     [SerializeField] ETileColliderType eTileColliderType;
     [SerializeField] Transform playerAttachmentPoint;
@@ -18,6 +18,8 @@ public class Tiles : MonoBehaviour
     //[SerializeField] Vector3 collisionOffset;
     [SerializeField] float adjustedXValue;
     [SerializeField] bool hasAttachmentPoint;
+    [SerializeField] ECustomTileType CustomTileType;
+    [SerializeField] GameObject CustomTilePartner;
 
     //[SerializeField] GameObject tilemanager;
     BoxCollider2D tileCollider;
@@ -156,6 +158,11 @@ public class Tiles : MonoBehaviour
         return eTileColliderType;
     }
 
+    public ECustomTileType getCustomTileType()
+    {
+        return CustomTileType;
+    }
+
     
 }
 
@@ -164,3 +171,9 @@ public enum ETileColliderType
         Box,
         Polygon
     };
+
+public enum ECustomTileType
+{
+    None,
+    BridgeHorizontal
+}

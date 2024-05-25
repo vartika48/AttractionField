@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
 
     Tiles tempClosestTile = null;
 
+    Tiles tempClosestSameTile = null;
+
     void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
@@ -298,6 +300,10 @@ public class Player : MonoBehaviour
                             
                         }
                     }
+                    else if(!tempClosestSameTile)
+                    {
+                        
+                    }
                     else
                     {
                         if (!isRepelled)
@@ -394,6 +400,44 @@ public class Player : MonoBehaviour
                     {
                         float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
                         if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestTile = tile;
+                        }
+                    }
+                    else if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() == tile.getTilePolarity() && tile.getHasAttachmentPoint() )
+                    {
+
+                    }
+                }
+                
+            }
+            
+        }
+        Debug.Log("Closest Tile Returned = "+closestTile);
+        return closestTile;
+    }
+
+    Tiles findClosestSamePolarityStaticTile()
+    {
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(grabbedTile.transform.position, searchRadius);
+        Tiles closestTile = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if(collider.gameObject.layer == layerIndex)
+            {
+                Tiles tile = collider.GetComponent<Tiles>();
+                Debug.Log("Tiles Found = "+tile.gameObject);
+
+                if(tile.getTilePolarity() != EPolarity.Neutral)
+                {
+                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() == tile.getTilePolarity() && tile.getHasAttachmentPoint())
+                    {
+                        float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
+                        if (distance < closestDistance && tile.getCustomTileType()==ECustomTileType.BridgeHorizontal)
                         {
                             closestDistance = distance;
                             closestTile = tile;
