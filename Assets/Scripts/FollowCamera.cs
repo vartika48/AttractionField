@@ -6,6 +6,7 @@ public class FollowCamera : MonoBehaviour
 {
     [SerializeField]
     GameObject followObject;
+    [SerializeField] bool isBG;
     
 
     // Start is called before the first frame update
@@ -21,6 +22,9 @@ public class FollowCamera : MonoBehaviour
     }
     private void LateUpdate() 
     {
+        if(!isBG)
+        transform.position = followObject.transform.position + new Vector3 (0, 0, -100);
+        else
         transform.position = followObject.transform.position + new Vector3 (0, 0, -10);
     }
 }

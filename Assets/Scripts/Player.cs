@@ -208,6 +208,29 @@ public class Player : MonoBehaviour
         }
     }
 
+    bool attractTileCenter(GameObject tileToMove, Vector3 center, Tiles tileCompRef)
+    {
+        tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
+        
+            if(tileCompRef.getTileColliderType()==ETileColliderType.Box)
+            tileToMove.GetComponent<BoxCollider2D>().isTrigger = true;
+            else
+            tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
+                                                                center,
+                                                                0.02f);
+
+            if (tileToMove.transform.position == center)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+    }
+
     // Repel tile from player functionality
     void repelTile(GameObject tileToMove, Vector3 pointToMove)
     {
@@ -300,15 +323,31 @@ public class Player : MonoBehaviour
                             
                         }
                     }
-                    else if(!tempClosestSameTile)
+                    else if(findClosestSamePolarityStaticTile())
                     {
-                        
+                        Debug.LogWarning("Part 2");
+                        tempClosestSameTile=findClosestSamePolarityStaticTile();
+                        GameObject tempRef = tempClosestSameTile.gameObject;
+                        GameObject partnerTile = tempClosestSameTile.getCustomTilePartner();
+                        Transform tempRefTransform = tempRef.transform.GetChild(0);
+                        Transform partnerTransform = partnerTile.transform.GetChild(0);
+
+                        Vector3 center = (tempRefTransform.position+partnerTransform.position)/2;
+                        if(!attractTileCenter(grabbedTile,center,HitTileRef))
+                        {
+                            Debug.Log("Not Center");
+                        }
+                        else
+                        {
+                            TileMover(tempClosestSameTile.getCustomTileType(),tempRefTransform,partnerTransform,grabbedTile);
+                        }
+
                     }
-                    else
+                    else if(tempClosestSameTile == null)
                     {
                         if (!isRepelled)
                         {
-                            randomRepelPoint = new(Random.Range(3f,6f), Random.Range(3f,6f), 0f);
+                            randomRepelPoint = new(Random.Range(minInclusiveRepel,maxExclusiveRepel), Random.Range(minInclusiveRepel,maxExclusiveRepel), 0f);
                             Debug.Log("Random Location of Repel : "+randomRepelPoint);
                         }
                         repelTile(grabbedTile, randomRepelPoint);
@@ -430,15 +469,17 @@ public class Player : MonoBehaviour
             if(collider.gameObject.layer == layerIndex)
             {
                 Tiles tile = collider.GetComponent<Tiles>();
-                Debug.Log("Tiles Found = "+tile.gameObject);
+                Debug.Log("Tiles Type 2 Found = "+tile.gameObject);
 
                 if(tile.getTilePolarity() != EPolarity.Neutral)
                 {
                     if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() == tile.getTilePolarity() && tile.getHasAttachmentPoint())
                     {
+                        Debug.Log("TYPE 2 True");
                         float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
                         if (distance < closestDistance && tile.getCustomTileType()==ECustomTileType.BridgeHorizontal)
                         {
+                            Debug.Log("TYPE 2 True 2");
                             closestDistance = distance;
                             closestTile = tile;
                         }
@@ -448,8 +489,13 @@ public class Player : MonoBehaviour
             }
             
         }
-        Debug.Log("Closest Tile Returned = "+closestTile);
+        Debug.Log("Closest Tile Type 2 Returned = "+closestTile);
         return closestTile;
+    }
+
+    void TileMover(ECustomTileType tileType, Transform TileA, Transform TileB, GameObject TileToMove)
+    {
+        Debug.Log("Tile Mover !!");
     }
 
 }

@@ -115,6 +115,12 @@ public class Tiles : MonoBehaviour
         return tileAttachmentPoint;
     }
 
+    public GameObject getCustomTilePartner()
+    {
+        return CustomTilePartner;
+;
+    }
+
     // Attract tile to player functionality 
     public void AttractTile(Transform grabPoint, Vector3 collisionHandle)
     {
