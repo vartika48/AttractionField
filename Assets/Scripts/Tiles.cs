@@ -216,7 +216,7 @@ public class Tiles : MonoBehaviour
     {
          if (tileMoveType == ECustomTileType.BridgeHorizontal)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 0.01sf);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 0.01f);
             Debug.Log("Current Position: " + transform.position);
 
             if (movingToB)

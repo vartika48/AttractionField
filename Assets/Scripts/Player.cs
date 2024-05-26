@@ -350,7 +350,6 @@ public class Player : MonoBehaviour
                             HitTileRef = null;
                             tempClosestSameTile = null;
                             return;
-
                         }
 
                     }
