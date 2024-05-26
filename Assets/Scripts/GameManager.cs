@@ -55,4 +55,6 @@ public class GameManager : MonoBehaviour
         // Static method to get the instance of the GameManager
         return instance;
     }
+
+    
 }

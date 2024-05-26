@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
 
             tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
                                                                 center,
-                                                                0.02f);
+                                                                0.05f);
 
             if (tileToMove.transform.position == center)
             {
@@ -327,19 +327,30 @@ public class Player : MonoBehaviour
                     {
                         Debug.LogWarning("Part 2");
                         tempClosestSameTile=findClosestSamePolarityStaticTile();
-                        GameObject tempRef = tempClosestSameTile.gameObject;
+                        //GameObject tempRef = tempClosestSameTile.gameObject;
                         GameObject partnerTile = tempClosestSameTile.getCustomTilePartner();
-                        Transform tempRefTransform = tempRef.transform.GetChild(0);
-                        Transform partnerTransform = partnerTile.transform.GetChild(0);
+
+                        Debug.Log(partnerTile);
+                        Transform tempRefTransform = tempClosestSameTile.getTileAttachmentPoint();
+                        Transform partnerTransform = partnerTile.GetComponent<Tiles>().getTileAttachmentPoint();
+
+                        Debug.Log("parttrans"+partnerTransform.transform);
 
                         Vector3 center = (tempRefTransform.position+partnerTransform.position)/2;
+        
+
                         if(!attractTileCenter(grabbedTile,center,HitTileRef))
                         {
                             Debug.Log("Not Center");
                         }
-                        else
+                        else if(tempClosestSameTile)
                         {
-                            TileMover(tempClosestSameTile.getCustomTileType(),tempRefTransform,partnerTransform,grabbedTile);
+                            HitTileRef.setInitTileMove(true, tempClosestSameTile.getCustomTileType(), tempRefTransform.transform, partnerTransform.transform);
+                            grabbedTile = null;
+                            HitTileRef = null;
+                            tempClosestSameTile = null;
+                            return;
+
                         }
 
                     }
@@ -493,10 +504,7 @@ public class Player : MonoBehaviour
         return closestTile;
     }
 
-    void TileMover(ECustomTileType tileType, Transform TileA, Transform TileB, GameObject TileToMove)
-    {
-        Debug.Log("Tile Mover !!");
-    }
+    
 
 }
 public enum EPolarity
