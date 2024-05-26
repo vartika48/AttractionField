@@ -96,6 +96,7 @@ public class Tiles : MonoBehaviour
 
     public void setInitTileMove(bool newValue, ECustomTileType newValueTileType, Transform TileA, Transform TileB)
     {
+        Debug.Log("InitTileMove");
         if(!initTileMove)
         {
             initTileMove = newValue;
@@ -214,8 +215,6 @@ public class Tiles : MonoBehaviour
     }
     public void TileMover(ECustomTileType tileMoveType)
     {
-         if (tileMoveType == ECustomTileType.BridgeHorizontal)
-        {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, 0.01f);
             Debug.Log("Current Position: " + transform.position);
 
@@ -239,7 +238,6 @@ public class Tiles : MonoBehaviour
                     movingToB = true;
                 }
             }
-        }
     }
 
     // Calculate edge offset of the tile to attach to player
@@ -273,5 +271,7 @@ public enum ETileColliderType
 public enum ECustomTileType
 {
     None,
-    BridgeHorizontal
+    BridgeHorizontal,
+    BridgeVertical
+
 }

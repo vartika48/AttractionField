@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
 
     Tiles HitTileRef;
 
+    bool hasClosestSamePolTile=false;
+
     //Tiles TileToAttachRef;
 
     Vector3 collisionHandle = new Vector3(0.1f,0f,0f);
@@ -219,10 +221,11 @@ public class Player : MonoBehaviour
 
             tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
                                                                 center,
-                                                                0.05f);
+                                                                0.1f);
 
-            if (tileToMove.transform.position == center)
+            if (Vector3.Distance(tileToMove.transform.position,center)<0.2f)
             {
+                Debug.Log("RetTruexLDNALKFLA");
                 return true;
             }
             else
@@ -323,10 +326,13 @@ public class Player : MonoBehaviour
                             
                         }
                     }
-                    else if(findClosestSamePolarityStaticTile())
+                    else if(findClosestSamePolarityStaticTile() || hasClosestSamePolTile)
                     {
                         Debug.LogWarning("Part 2");
+                        if(!hasClosestSamePolTile)
                         tempClosestSameTile=findClosestSamePolarityStaticTile();
+                        
+                        hasClosestSamePolTile = true;
                         //GameObject tempRef = tempClosestSameTile.gameObject;
                         GameObject partnerTile = tempClosestSameTile.getCustomTilePartner();
 
@@ -345,11 +351,12 @@ public class Player : MonoBehaviour
                         }
                         else if(tempClosestSameTile)
                         {
+                            Debug.Log("Center");
                             HitTileRef.setInitTileMove(true, tempClosestSameTile.getCustomTileType(), tempRefTransform.transform, partnerTransform.transform);
                             grabbedTile = null;
                             HitTileRef = null;
                             tempClosestSameTile = null;
-                            return;
+                            hasClosestSamePolTile=false;
                         }
 
                     }
@@ -487,7 +494,7 @@ public class Player : MonoBehaviour
                     {
                         Debug.Log("TYPE 2 True");
                         float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
-                        if (distance < closestDistance && tile.getCustomTileType()==ECustomTileType.BridgeHorizontal)
+                        if (distance < closestDistance && tile.getCustomTileType()!=ECustomTileType.None)
                         {
                             Debug.Log("TYPE 2 True 2");
                             closestDistance = distance;

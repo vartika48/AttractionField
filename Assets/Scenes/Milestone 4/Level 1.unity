@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followObject: {fileID: 1695542699}
+  isBG: 1
 --- !u!212 &206228616
 SpriteRenderer:
   m_ObjectHideFlags: 0
