@@ -115,9 +115,9 @@ public class Tiles : MonoBehaviour
         
             else
             {
-                targetPosition = TileB.position + new Vector3(0,adjustedYValue/2,0);
+                targetPosition = TileA.position;
                 MoveTileAPos = targetPosition;
-                MoveTileBPos = TileB.position - new Vector3(0,adjustedYValue/2,0);
+                MoveTileBPos = TileB.position;
             }
         }
         
