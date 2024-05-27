@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(TileTypeA))]
+
 public class TileManagerEditor : Editor
 {
      private string spriteNameToAssign = ""; // Variable to hold the entered sprite name
@@ -27,3 +29,4 @@ public class TileManagerEditor : Editor
         }
     }
 }
+#endif
