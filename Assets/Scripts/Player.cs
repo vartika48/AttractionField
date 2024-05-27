@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     
     //private GameObject tileToBridge;
     private int layerIndex;
-    bool isPolarityTimerActive;                 // bool to check if reset polarity timer is active               
+    bool isPolarityTimerActive=false;                 // bool to check if reset polarity timer is active               
     Vector3 randomRepelPoint; 
 
     float disCheck;                  
@@ -44,11 +44,15 @@ public class Player : MonoBehaviour
 
     Tiles HitTileRef;
 
+    bool hasClosestSamePolTile=false;
+
     //Tiles TileToAttachRef;
 
     Vector3 collisionHandle = new Vector3(0.1f,0f,0f);
 
     Tiles tempClosestTile = null;
+
+    Tiles tempClosestSameTile = null;
 
     void Awake() 
     {
@@ -98,11 +102,13 @@ public class Player : MonoBehaviour
             if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
             {
                 setPolarity(EPolarity.Negative);
+                GameManager.instance.setPlayerPolarity(playerPolarity);
                 
             }
             else if(playerPolarity==EPolarity.Negative)
             {
                 setPolarity(EPolarity.Positive);
+                GameManager.instance.setPlayerPolarity(playerPolarity);
             }
             Debug.Log("Player Polarity = "+playerPolarity);
 
@@ -197,11 +203,35 @@ public class Player : MonoBehaviour
             tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
 
             tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
-                                                                otherTile.GetComponent<Tiles>().getTileAttachmentPoint().position+collisionHandle,
+                                                                otherTile.GetComponent<Tiles>().getTileAttachmentPoint().position+placementOffset(placementOffsetAdjusted)+collisionHandle,
                                                                 0.05f);
             // if(grabbedTile.transform.position == grabPoint.position+placementOffset(grabbedTile.transform)-new Vector3(0.1f,0f,0f))
             //grabbedTile.GetComponent<BoxCollider2D>().isTrigger = false;
         }
+    }
+
+    bool attractTileCenter(GameObject tileToMove, Vector3 center, Tiles tileCompRef)
+    {
+        tileToMove.GetComponent<Rigidbody2D>().isKinematic = true;
+        
+            if(tileCompRef.getTileColliderType()==ETileColliderType.Box)
+            tileToMove.GetComponent<BoxCollider2D>().isTrigger = true;
+            else
+            tileToMove.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+            tileToMove.transform.position = Vector3.MoveTowards(tileToMove.transform.position, 
+                                                                center,
+                                                                0.1f);
+
+            if (Vector3.Distance(tileToMove.transform.position,center)<0.2f)
+            {
+                Debug.Log("RetTruexLDNALKFLA");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
     }
 
     // Repel tile from player functionality
@@ -230,6 +260,7 @@ public class Player : MonoBehaviour
     {
         isPolarityTimerActive = false;
         setPolarity(EPolarity.Neutral);
+        GameManager.instance.setPlayerPolarity(playerPolarity);
         Debug.Log("Value reset to Neutral");
     }
 
@@ -239,6 +270,7 @@ public class Player : MonoBehaviour
         //setPolarity(polarity);
         isPolarityTimerActive=true;
         yield return new WaitForSeconds(resetdelay);
+        if(!grabbedTile)
         ResetPolarity(); //Work later if needed
 
     }
@@ -268,17 +300,17 @@ public class Player : MonoBehaviour
 
                         Vector3 tempGrabbedTilePos = (grabbedTile.transform.position+placementOffset(HitTileRef.getAdjustedScale()));
 
-                        Vector3 tempStaticTilePos = (tempClosestTile.gameObject.transform.position-placementOffset(tempClosestTile.getAdjustedScale()));
+                        Vector3 tempStaticTilePos;
 
-                        //Debug.LogWarning("Grabbed Tile Position = "+tempGrabbedTilePos);
-                        //Debug.Log("Static Tile Position = "+tempStaticTilePos);
-                        
-
+                        if(grabbedTile.transform.position.x < tempClosestTile.gameObject.transform.position.x)
+                        tempStaticTilePos = (tempClosestTile.gameObject.transform.position-placementOffset(tempClosestTile.getAdjustedScale()));
+                        else
+                        tempStaticTilePos = ((tempClosestTile.gameObject.transform.position+placementOffset(tempClosestTile.getAdjustedScale()))+tempClosestTile.getAdjustedScale());
 
                         disCheck = Vector3.Distance(tempGrabbedTilePos, tempStaticTilePos);
 
                         Debug.Log("DisCHECK = "+disCheck);
-                        if(disCheck < 1)
+                        if(disCheck < 1 )
                         {
                             Debug.Log("Positions are Equal");
 
@@ -294,11 +326,45 @@ public class Player : MonoBehaviour
                             
                         }
                     }
-                    else
+                    else if(findClosestSamePolarityStaticTile() || hasClosestSamePolTile)
+                    {
+                        Debug.LogWarning("Part 2");
+                        if(!hasClosestSamePolTile)
+                        tempClosestSameTile=findClosestSamePolarityStaticTile();
+                        
+                        hasClosestSamePolTile = true;
+                        //GameObject tempRef = tempClosestSameTile.gameObject;
+                        GameObject partnerTile = tempClosestSameTile.getCustomTilePartner();
+
+                        Debug.Log(partnerTile);
+                        Transform tempRefTransform = tempClosestSameTile.getTileAttachmentPoint();
+                        Transform partnerTransform = partnerTile.GetComponent<Tiles>().getTileAttachmentPoint();
+
+                        Debug.Log("parttrans"+partnerTransform.transform);
+
+                        Vector3 center = (tempRefTransform.position+partnerTransform.position)/2;
+        
+
+                        if(!attractTileCenter(grabbedTile,center,HitTileRef))
+                        {
+                            Debug.Log("Not Center");
+                        }
+                        else if(tempClosestSameTile)
+                        {
+                            Debug.Log("Center");
+                            HitTileRef.setInitTileMove(true, tempClosestSameTile.getCustomTileType(), tempRefTransform.transform, partnerTransform.transform);
+                            grabbedTile = null;
+                            HitTileRef = null;
+                            tempClosestSameTile = null;
+                            hasClosestSamePolTile=false;
+                        }
+
+                    }
+                    else if(tempClosestSameTile == null)
                     {
                         if (!isRepelled)
                         {
-                            randomRepelPoint = new(Random.Range(3f,6f), Random.Range(3f,6f), 0f);
+                            randomRepelPoint = new(Random.Range(minInclusiveRepel,maxExclusiveRepel), Random.Range(minInclusiveRepel,maxExclusiveRepel), 0f);
                             Debug.Log("Random Location of Repel : "+randomRepelPoint);
                         }
                         repelTile(grabbedTile, randomRepelPoint);
@@ -386,11 +452,51 @@ public class Player : MonoBehaviour
 
                 if(tile.getTilePolarity() != EPolarity.Neutral)
                 {
-                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() != tile.getTilePolarity() )
+                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() != tile.getTilePolarity() && tile.getHasAttachmentPoint() )
                     {
                         float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
                         if (distance < closestDistance)
                         {
+                            closestDistance = distance;
+                            closestTile = tile;
+                        }
+                    }
+                    else if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() == tile.getTilePolarity() && tile.getHasAttachmentPoint() )
+                    {
+
+                    }
+                }
+                
+            }
+            
+        }
+        Debug.Log("Closest Tile Returned = "+closestTile);
+        return closestTile;
+    }
+
+    Tiles findClosestSamePolarityStaticTile()
+    {
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(grabbedTile.transform.position, searchRadius);
+        Tiles closestTile = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if(collider.gameObject.layer == layerIndex)
+            {
+                Tiles tile = collider.GetComponent<Tiles>();
+                Debug.Log("Tiles Type 2 Found = "+tile.gameObject);
+
+                if(tile.getTilePolarity() != EPolarity.Neutral)
+                {
+                    if (tile != null && tile.getIsStatic() && HitTileRef.getTilePolarity() == tile.getTilePolarity() && tile.getHasAttachmentPoint())
+                    {
+                        Debug.Log("TYPE 2 True");
+                        float distance = Vector2.Distance(grabbedTile.transform.position, tile.transform.position);
+                        if (distance < closestDistance && tile.getCustomTileType()!=ECustomTileType.None)
+                        {
+                            Debug.Log("TYPE 2 True 2");
                             closestDistance = distance;
                             closestTile = tile;
                         }
@@ -400,7 +506,7 @@ public class Player : MonoBehaviour
             }
             
         }
-        Debug.Log("Closest Tile Returned = "+closestTile);
+        Debug.Log("Closest Tile Type 2 Returned = "+closestTile);
         return closestTile;
     }
 

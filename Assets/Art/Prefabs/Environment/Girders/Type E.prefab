@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3541942568393307931}
   - component: {fileID: 5698379588214966855}
   - component: {fileID: 4847722704037017409}
+  - component: {fileID: 2192130852065693728}
   m_Layer: 6
   m_Name: Type E
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1326898945, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
+  m_Sprite: {fileID: 69729413, guid: 4e96b5e6b7a57784498e57a635b04272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,8 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePolarity: 0
-  isStatic: 0
-  eTileColliderType: 0
+  isStatic: 1
+  eTileColliderType: 1
   playerAttachmentPoint: {fileID: 0}
   tileAttachmentPoint: {fileID: 0}
   adjustedXValue: 4
@@ -166,3 +167,54 @@ MonoBehaviour:
   - {fileID: 1117379757, guid: 976f58e5460b6a6409027d49081414fc, type: 3}
   - {fileID: 845161848, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
   - {fileID: -335166037, guid: 356e18c80e5f8224c87838bf0b633731, type: 3}
+--- !u!60 &2192130852065693728
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286462279519564459}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.28515625, y: 0.38102466}
+    newSize: {x: 0.28515625, y: 0.38297865}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.045017045, y: 0.18928832}
+      - {x: 0.04555784, y: -0.09230177}
+      - {x: -0.14106187, y: -0.09404297}
+      - {x: -0.14187986, y: -0.1887166}
+      - {x: 0.1411361, y: -0.18846685}
+      - {x: 0.14131716, y: 0.18877552}
+  m_UseDelaunayMesh: 0

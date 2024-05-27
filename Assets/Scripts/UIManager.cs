@@ -2,32 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
-    GameManager gameManager = GameManager.instance;
+    GameManager gameManager;
 
-    [SerializeField] private TextMeshProUGUI playerPolarityText;
+    [SerializeField] TextMeshProUGUI playerPolarityText;
+    [SerializeField] RectTransform LevelCompleteScreen;
 
+
+    private void Awake() 
+    {
+        if (gameManager != null)
+        {
+            gameManager.OnPolarityChanged += UpdatePlayerPolarityText;
+            gameManager.OnLevelCompleted += LevelCompleted;
+        }
+        else
+        {
+            Debug.LogError("GameManager is not assigned in OnEnable.");
+        }
+    }
     private void UpdatePlayerPolarityText(EPolarity newPolarity)
     {
+        Debug.Log("Player Polarity Change");
         playerPolarityText.text = "Player Polarity : "+newPolarity.ToString();
     }
 
     private void OnEnable()
     {
-        GameManager.instance.OnPolarityChanged += UpdatePlayerPolarityText;
+        if(gameManager == null)
+        {
+            gameManager.OnPolarityChanged += UpdatePlayerPolarityText;
+            gameManager.OnLevelCompleted += LevelCompleted;
+        }
+        else
+        {
+            Debug.Log("Game Manager is Null");
+        }
+        
     }
 
-    private void Awake() 
+    // private void OnDisable() 
+    // {
+    //     if(gameManager == null)
+    //     {
+    //         gameManager.OnPolarityChanged -= UpdatePlayerPolarityText;
+    //         gameManager.OnLevelCompleted -= LevelCompleted;
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Game Manager is Null");
+    //     }
+    // }
+
+    private void LevelCompleted()
     {
-        
+        LevelCompleteScreen.gameObject.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        LevelCompleteScreen.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

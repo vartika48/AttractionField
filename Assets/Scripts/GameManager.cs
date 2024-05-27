@@ -7,14 +7,25 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public delegate void PolarityChangedDelegate(EPolarity newPolarity);
+
+    public delegate void LevelCompleteDelegate();
+    
     public event PolarityChangedDelegate OnPolarityChanged;
+
+    public event LevelCompleteDelegate OnLevelCompleted;
 
     EPolarity playerPolarity;
 
     public void setPlayerPolarity(EPolarity newPolarity)
     {
+        Debug.Log("Change Delegated");
         playerPolarity = newPolarity;
         OnPolarityChanged?.Invoke(playerPolarity);
+    }
+
+    public void LevelCompleted()
+    {
+        OnLevelCompleted?.Invoke();
     }
 
     public EPolarity getPLayerPolarity()
@@ -44,4 +55,6 @@ public class GameManager : MonoBehaviour
         // Static method to get the instance of the GameManager
         return instance;
     }
+
+    
 }
