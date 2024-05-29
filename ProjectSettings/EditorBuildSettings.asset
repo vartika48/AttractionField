@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Milestone 4/Start.unity
+    guid: 96f085ec8e0b93448912b77cd46dbb30
+  - enabled: 1
     path: Assets/Scenes/Milestone 4/Level 1.unity
     guid: 06e144c106aa48445941f84ac866bb50
   - enabled: 1

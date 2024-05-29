@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     EPolarity playerPolarity;
 
+    int sceneIndex = 0;
+    
+
     public void setPlayerPolarity(EPolarity newPolarity)
     {
         Debug.Log("Change Delegated");
@@ -25,11 +31,23 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompleted()
     {
+        Debug.Log("Level Complete Game Manger ");
         OnLevelCompleted?.Invoke();
+        
+    }
+
+    public int getSceneIndex()
+    {
+        return sceneIndex;
+    }
+    public void setSceneIndex(int newSceneIndex)
+    {
+        sceneIndex = newSceneIndex;
     }
 
     public EPolarity getPLayerPolarity()
     {
+
         return playerPolarity;
     }
 
@@ -53,7 +71,7 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance()
     {
         // Static method to get the instance of the GameManager
-        return instance;
+        return GameManager.instance;
     }
 
     

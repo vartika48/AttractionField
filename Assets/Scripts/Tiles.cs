@@ -164,7 +164,10 @@ public class Tiles : MonoBehaviour
         return availableForAttachment;
     }
 
-    
+    public void setIsStatic(bool newValue)
+    {
+        isStatic=newValue;
+    }
 
     public void setIsGrabbed(bool newValue)
     {

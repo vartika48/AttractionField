@@ -1331,7 +1331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1189996159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1957,6 +1957,14 @@ PrefabInstance:
     - target: {fileID: 4221384812238060058, guid: 0c98fd773d366b541b696989756d173f, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999319488517187071, guid: 0c98fd773d366b541b696989756d173f, type: 3}
+      propertyPath: maxExclusiveRepel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999319488517187071, guid: 0c98fd773d366b541b696989756d173f, type: 3}
+      propertyPath: minInclusiveRepel
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8713130977339343294, guid: 0c98fd773d366b541b696989756d173f, type: 3}
       propertyPath: m_LocalPosition.x
