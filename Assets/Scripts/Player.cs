@@ -322,7 +322,7 @@ public class Player : MonoBehaviour
                             else
                             grabbedTile.GetComponent<PolygonCollider2D>().isTrigger = false;
 
-                            HitTileRef.setIsStatic(true);
+                            //HitTileRef.setIsStatic(true);
                             grabbedTile=null;
                             Debug.LogWarning("grabbedTile Nulled");
                             tempClosestTile =null;
