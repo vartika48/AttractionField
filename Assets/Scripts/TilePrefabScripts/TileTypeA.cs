@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class TileTypeA : MonoBehaviour
 {
     // List to hold sprite names
@@ -47,3 +48,4 @@ public class TileTypeA : MonoBehaviour
         }
     }
 }
+#endif

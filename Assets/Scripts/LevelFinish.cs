@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelFinish : MonoBehaviour
 {
@@ -10,6 +12,18 @@ public class LevelFinish : MonoBehaviour
         {
             Debug.Log("Level Finished");
             GameManager.instance.LevelCompleted();
+            
+            bool LoadSceneinit = false;
+
+            if(!LoadSceneinit)
+            {
+                SceneManager.LoadScene(GameManager.instance.getSceneIndex()+1);
+                LoadSceneinit = true;
+            }
+            
+
+            
+
         }
     }
 }

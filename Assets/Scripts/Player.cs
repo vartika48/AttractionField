@@ -54,9 +54,12 @@ public class Player : MonoBehaviour
 
     Tiles tempClosestSameTile = null;
 
+    GameManager gm;
+
     void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
+        gm = GameManager.instance;
     }
 
     void Start() 
@@ -102,13 +105,13 @@ public class Player : MonoBehaviour
             if(playerPolarity==EPolarity.Positive || playerPolarity==EPolarity.Neutral)
             {
                 setPolarity(EPolarity.Negative);
-                GameManager.instance.setPlayerPolarity(playerPolarity);
+                gm.setPlayerPolarity(playerPolarity);
                 
             }
             else if(playerPolarity==EPolarity.Negative)
             {
                 setPolarity(EPolarity.Positive);
-                GameManager.instance.setPlayerPolarity(playerPolarity);
+                gm.setPlayerPolarity(playerPolarity);
             }
             Debug.Log("Player Polarity = "+playerPolarity);
 
@@ -319,6 +322,7 @@ public class Player : MonoBehaviour
                             else
                             grabbedTile.GetComponent<PolygonCollider2D>().isTrigger = false;
 
+                            //HitTileRef.setIsStatic(true);
                             grabbedTile=null;
                             Debug.LogWarning("grabbedTile Nulled");
                             tempClosestTile =null;

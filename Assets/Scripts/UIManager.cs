@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
@@ -12,8 +13,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform LevelCompleteScreen;
 
 
+
     private void Awake() 
     {
+        gameManager = GameManager.instance;
         if (gameManager != null)
         {
             gameManager.OnPolarityChanged += UpdatePlayerPolarityText;
@@ -73,4 +76,6 @@ public class UIManager : MonoBehaviour
     {
         
     }
+
+    
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(TileTypeD))]
 public class TileManagerEditorD : Editor
 {
@@ -28,3 +29,4 @@ public class TileManagerEditorD : Editor
         }
     }
 }
+#endif
