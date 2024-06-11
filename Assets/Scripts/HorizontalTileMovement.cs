@@ -7,7 +7,7 @@ public class HorizontalTileMovement : MonoBehaviour
     private float dirX;
     private float moveSpeed;
     private Rigidbody2D rb;
-        private Vector 3 localScale;
+        private Vector3 localScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +17,9 @@ public class HorizontalTileMovement : MonoBehaviour
         moveSpeed = 3f;
 
     }
-    public void OnTrigger2D(Collider2D, collision)
+    public void OnTrigger2D(Collider2D collision)
     {
-        if (collision.GetComponent<tile>())
+        if (collision.GetComponent<Tiles>())
         {
             dirX*= -1f;
         }
@@ -27,7 +27,6 @@ public class HorizontalTileMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y)
-        
+        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);        
     }
 }
